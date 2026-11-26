@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as FunilRouteImport } from './routes/funil'
+import { Route as SiteRouteImport } from './routes/site'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const FunilRoute = FunilRouteImport.update({
   path: '/funil',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SiteRoute = SiteRouteImport.update({
+  id: '/site',
+  path: '/site',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
   '/auth': typeof AuthRoute
   '/funil': typeof FunilRoute
+  '/site': typeof SiteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
   '/auth': typeof AuthRoute
   '/funil': typeof FunilRoute
+  '/site': typeof SiteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/agenda': typeof AgendaRoute
   '/auth': typeof AuthRoute
   '/funil': typeof FunilRoute
+  '/site': typeof SiteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/agenda' | '/auth' | '/funil'
+  fullPaths: '/' | '/agenda' | '/auth' | '/funil' | '/site'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/agenda' | '/auth' | '/funil'
-  id: '__root__' | '/' | '/agenda' | '/auth' | '/funil'
+  to: '/' | '/agenda' | '/auth' | '/funil' | '/site'
+  id: '__root__' | '/' | '/agenda' | '/auth' | '/funil' | '/site'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +76,7 @@ export interface RootRouteChildren {
   AgendaRoute: typeof AgendaRoute
   AuthRoute: typeof AuthRoute
   FunilRoute: typeof FunilRoute
+  SiteRoute: typeof SiteRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FunilRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/site': {
+      id: '/site'
+      path: '/site'
+      fullPath: '/site'
+      preLoaderRoute: typeof SiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   AgendaRoute: AgendaRoute,
   AuthRoute: AuthRoute,
   FunilRoute: FunilRoute,
+  SiteRoute: SiteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
