@@ -1,18 +1,143 @@
 import { Link } from '@tanstack/react-router';
-import { Inbox, Columns3, CalendarDays, ChevronDown, ShieldCheck, LogOut, Plus, MessageCircle, Instagram } from 'lucide-react';
+import { MessagesSquare, Columns3, CalendarDays, ShieldCheck, LogOut, LogIn, Plus, MessageCircle, Instagram, Bell, CircleHelp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useSales } from './data';
 import { supabase } from '@/integrations/supabase/client';
 import { initials, stages, icpScore, icpLabel } from './model';
 import type { ReactNode } from 'react';
-export function Brand(){return <div className="brand"><svg className="brand-mark" viewBox="0 0 32 36" fill="none" aria-hidden="true"><path d="M3 5h25v8H11v6h13v8H11v7H3V5Z" fill="currentColor"/><path d="M3 1h25v3H3z" fill="currentColor" opacity=".35"/></svg><div className="brand-name">FindFlow<span className="brand-sub">SALES</span></div></div>}
-export function Avatar({name,small=false,alt=false,square=false}:{name:string;small?:boolean;alt?:boolean;square?:boolean}){return <div className={`avatar ${small?'small':''} ${alt?'alt':''} ${square?'square':''}`}>{initials(name)}</div>}
-export function Channel({channel}:{channel:string}){return channel==='Instagram'?<Instagram className="channel-icon instagram"/>:<MessageCircle className="channel-icon"/>}
-export function StageTag({stage}:{stage:number}){return <span className={`stage-tag ${stage===7?'success':''}`}>{stages[stage]}</span>}
-export function Icp({criteria}:{criteria:unknown}){const score=icpScore(criteria);return <><div className="icp-line"><span className={`icp-label ${score<70?'low':''}`}><ShieldCheck size={12}/>{icpLabel(score)}</span><span className="text-muted-foreground">ICP <strong className="text-foreground">{score}</strong> / 100</span></div><div className="icp-bar">{Array.from({length:5},(_,i)=><span key={i} className={i<score/20?'filled':''}/>)}</div></>}
-export function Shell({area,children,onNew}:{area:'Inbox'|'Funil'|'Agenda';children:ReactNode;onNew:()=>void}){
- const {user,demo,leads,profiles,admin}=useSales();const profile=profiles.find(p=>p.id===user?.id);const unread=leads.reduce((sum,l)=>sum+l.unread,0);
- const subtitle=area==='Inbox'?'Todas as conversas. Nenhuma oportunidade perdida.':area==='Funil'?'Cada oportunidade, no lugar certo.':'Seu próximo passo começa aqui.';
- return <div className="app-shell"><aside className="sidebar"><Brand/><div className="nav-caption">CENTRAL COMERCIAL</div><nav><Link to="/" search={{}} className={`nav-link ${area==='Inbox'?'active':''}`}><Inbox size={18}/><span className="nav-text">Inbox</span>{unread>0&&<span className="nav-count">{unread}</span>}</Link><Link to="/funil" className={`nav-link ${area==='Funil'?'active':''}`}><Columns3 size={18}/><span className="nav-text">Funil</span></Link><Link to="/agenda" className={`nav-link ${area==='Agenda'?'active':''}`}><CalendarDays size={18}/><span className="nav-text">Agenda</span></Link></nav><div className="sidebar-bottom"><div className="team-note"><ShieldCheck size={15}/><span>Um time conectado.<br/>Nenhum lead esquecido.</span></div><div className="profile"><Avatar name={profile?.name??'Camila Andrade'} small/><div className="profile-info"><span className="profile-name">{profile?.name??'Camila Andrade'}</span><span className="profile-role">{demo?'Demonstração':admin?'Administrador':'Comercial'}</span></div>{demo?<Button variant="ghost" size="icon" asChild title="Entrar na sua conta"><Link to="/auth"><ChevronDown size={14}/></Link></Button>:<Button variant="ghost" size="icon" title="Sair da conta" onClick={()=>supabase.auth.signOut()}><LogOut size={14}/></Button>}</div></div></aside><main className="workspace"><header className="page-header"><div><h1>{area}</h1><p>{subtitle}</p></div><div className="header-actions"><span className="page-date">{new Date().toLocaleDateString('pt-BR',{day:'numeric',month:'long'})}</span>{demo&&<Link to="/auth" className="demo-pill">Demonstração · Entrar</Link>}<Button onClick={onNew}><Plus size={16}/>{area==='Agenda'?'Nova atividade':'Novo lead'}</Button></div></header>{children}</main></div>
+
+export function Brand({ light = false }: { light?: boolean }) {
+  return (
+    <div className={`brand ${light ? 'light' : ''}`}>
+      <svg className="brand-mark" viewBox="0 0 32 36" fill="none" aria-hidden="true">
+        <path d="M3 5h25v8H11v6h13v8H11v7H3V5Z" fill="currentColor" />
+        <path d="M3 1h25v3H3z" fill="currentColor" opacity=".35" />
+      </svg>
+      <div className="brand-name">
+        FindFlow<span className="brand-sub">SALES</span>
+      </div>
+    </div>
+  );
 }
-export function Field({label,children,className=''}:{label:string;children:ReactNode;className?:string}){return <label className={`field ${className}`}><span>{label}</span>{children}</label>}
+
+export function Avatar({ name, small = false, alt = false, square = false }: { name: string; small?: boolean; alt?: boolean; square?: boolean }) {
+  return <div className={`avatar ${small ? 'small' : ''} ${alt ? 'alt' : ''} ${square ? 'square' : ''}`}>{initials(name)}</div>;
+}
+
+export function Channel({ channel }: { channel: string }) {
+  return channel === 'Instagram' ? <Instagram className="channel-icon instagram" /> : <MessageCircle className="channel-icon" />;
+}
+
+export function StageTag({ stage }: { stage: number }) {
+  return <span className={`stage-tag ${stage === 7 ? 'success' : ''}`}>{stages[stage]}</span>;
+}
+
+export function Icp({ criteria }: { criteria: unknown }) {
+  const score = icpScore(criteria);
+  return (
+    <>
+      <div className="icp-line">
+        <span className={`icp-label ${score < 70 ? 'low' : ''}`}>
+          <ShieldCheck size={12} />
+          {icpLabel(score)}
+        </span>
+        <span className="text-muted-foreground">
+          ICP <strong className="text-foreground">{score}</strong> / 100
+        </span>
+      </div>
+      <div className="icp-bar">
+        {Array.from({ length: 5 }, (_, i) => (
+          <span key={i} className={i < score / 20 ? 'filled' : ''} />
+        ))}
+      </div>
+    </>
+  );
+}
+
+type Area = 'Inbox' | 'Funil' | 'Agenda';
+
+export function Shell({ area, children, onNew }: { area: Area; children: ReactNode; onNew: () => void }) {
+  const { user, demo, leads, profiles, admin } = useSales();
+  const profile = profiles.find((p) => p.id === user?.id);
+  const name = profile?.name ?? 'Camila Andrade';
+  const unread = leads.reduce((sum, l) => sum + l.unread, 0);
+  const pending = leads.filter((l) => l.next_at && new Date(l.next_at).getTime() < Date.now()).length;
+  const subtitle = area === 'Funil' ? 'Cada oportunidade, no lugar certo.' : 'Seu próximo passo começa aqui.';
+
+  return (
+    <div className="app-shell">
+      <header className="topbar">
+        <Link to="/" search={{}} className="topbar-brand" aria-label="Ir para a Inbox">
+          <Brand light />
+        </Link>
+        <nav className="topbar-nav" aria-label="Menu principal">
+          <Link to="/" search={{}} className={`top-link ${area === 'Inbox' ? 'active' : ''}`} title="Conversas">
+            <MessagesSquare size={19} />
+            <span className="top-text">Conversas</span>
+            {unread > 0 && <span className="top-badge">{unread}</span>}
+          </Link>
+          <Link to="/funil" className={`top-link ${area === 'Funil' ? 'active' : ''}`} title="Funil de vendas">
+            <Columns3 size={19} />
+            <span className="top-text">Funil</span>
+          </Link>
+          <Link to="/agenda" className={`top-link ${area === 'Agenda' ? 'active' : ''}`} title="Agenda">
+            <CalendarDays size={19} />
+            <span className="top-text">Agenda</span>
+          </Link>
+        </nav>
+        <div className="topbar-right">
+          {demo && (
+            <Link to="/auth" className="demo-pill">
+              Demonstração
+            </Link>
+          )}
+          <Button size="sm" className="topbar-new" onClick={onNew}>
+            <Plus size={15} />
+            <span className="top-text">{area === 'Agenda' ? 'Nova atividade' : 'Novo lead'}</span>
+          </Button>
+          <button type="button" className="top-icon" title="Ajuda">
+            <CircleHelp size={19} />
+          </button>
+          <Link to="/agenda" className="top-icon" title="Ações atrasadas">
+            <Bell size={19} />
+            {pending > 0 && <span className="top-badge">{pending}</span>}
+          </Link>
+          <div className="topbar-profile" title={`${name} · ${demo ? 'Demonstração' : admin ? 'Administrador' : 'Comercial'}`}>
+            <Avatar name={name} small />
+            <span className="online-dot" />
+          </div>
+          {demo ? (
+            <Link to="/auth" className="top-icon" title="Entrar na sua conta">
+              <LogIn size={18} />
+            </Link>
+          ) : (
+            <button type="button" className="top-icon" title="Sair da conta" onClick={() => supabase.auth.signOut()}>
+              <LogOut size={18} />
+            </button>
+          )}
+        </div>
+      </header>
+      <main className="workspace">
+        {area !== 'Inbox' && (
+          <div className="page-header">
+            <div>
+              <h1>{area}</h1>
+              <p>{subtitle}</p>
+            </div>
+            <span className="page-date">{new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long' })}</span>
+          </div>
+        )}
+        {children}
+      </main>
+    </div>
+  );
+}
+
+export function Field({ label, children, className = '' }: { label: string; children: ReactNode; className?: string }) {
+  return (
+    <label className={`field ${className}`}>
+      <span>{label}</span>
+      {children}
+    </label>
+  );
+}
