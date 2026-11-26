@@ -14,7 +14,7 @@ function AuthRoute() {
         <Brand />
         <h1>Entrar</h1>
         <p>A tela de login por e-mail e senha será concluída quando houver créditos disponíveis.</p>
-        <Link to="/" search={{ lead: undefined }} className="auth-link">
+        <Link to="/" search={{}} className="auth-link">
           Voltar para a demonstração
         </Link>
       </div>
