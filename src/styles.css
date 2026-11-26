@@ -484,14 +484,15 @@ html:has(.lp) { scroll-behavior:smooth; scroll-padding-top:80px; }
 .lp-bubble.out { align-self:flex-end; background:var(--chat-out); border-radius:10px 4px 10px 10px; }
 .lp-bubble.out svg { color:var(--primary); float:right; margin:4px 0 0 6px; }
 .lp-bubble.ai { border:1px solid oklch(0.85 0.06 262); }
+.lp-bubble .lp-ai-chip { display:flex; width:fit-content; }
 .lp-ai-chip { display:inline-flex; align-items:center; gap:4px; background:var(--lp-blue); color:oklch(1 0 0); font-size:9px; font-weight:600; border-radius:4px; padding:2px 6px; margin-bottom:5px; }
 .lp-mock-composer { margin:8px 10px 10px; background:var(--card); border:1px solid var(--border); border-radius:999px; padding:7px 7px 7px 12px; display:flex; align-items:center; justify-content:space-between; color:var(--muted-foreground); font-size:10px; }
 .lp-mock-composer i { width:22px; height:22px; border-radius:50%; background:var(--primary); }
 .lp-float { position:absolute; display:flex; align-items:center; gap:10px; background:var(--card); border-radius:12px; padding:10px 14px; box-shadow:0 14px 34px oklch(0.3 0.08 262 / 0.2); animation:lp-float 5s ease-in-out infinite; }
 .lp-float strong { display:block; font-size:12px; }
 .lp-float small { font-size:11px; color:var(--muted-foreground); }
-.lp-float-1 { left:-34px; top:96px; }
-.lp-float-2 { right:-26px; bottom:44px; animation-delay:-2.5s; }
+.lp-float-1 { left:-40px; bottom:36px; }
+.lp-float-2 { right:-26px; top:70px; animation-delay:-2.5s; }
 .lp-float-icon { width:32px; height:32px; border-radius:9px; display:grid; place-items:center; color:oklch(1 0 0); }
 .lp-float-icon.green { background:var(--success); }
 .lp-float-icon.blue { background:var(--primary); }
@@ -538,7 +539,7 @@ html:has(.lp) { scroll-behavior:smooth; scroll-padding-top:80px; }
 .lp-kcol h4 i.d3 { background:var(--success); }
 .lp-kcard { background:var(--card); border-radius:10px; padding:10px; margin-bottom:8px; box-shadow:var(--shadow-soft); border-left:3px solid var(--primary); }
 .lp-kcard strong { display:block; font-size:12px; margin-bottom:3px; }
-.lp-kcard small { font-size:10px; color:var(--muted-foreground); }
+.lp-kcard small { display:block; font-size:10px; line-height:1.35; color:var(--muted-foreground); }
 .lp-steps { display:flex; flex-direction:column; gap:20px; margin-top:32px; }
 .lp-step { display:flex; gap:16px; }
 .lp-step > span { flex-shrink:0; width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:var(--primary); color:oklch(1 0 0); font-weight:700; font-size:14px; }
