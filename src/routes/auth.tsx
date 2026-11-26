@@ -1,6 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Brand } from "@/features/sales/shared";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useState, type FormEvent } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { Brand, Field } from "@/features/sales/shared";
 import { meta } from "@/features/sales/model";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/auth")({
   head: () => meta("Entrar", "Acesso à central comercial FindFlow Sales."),
@@ -8,12 +11,87 @@ export const Route = createFileRoute("/auth")({
 });
 
 function AuthRoute() {
+  const navigate = useNavigate();
+  const [mode, setMode] = useState<"entrar" | "criar">("entrar");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
+
+  async function submit(event: FormEvent) {
+    event.preventDefault();
+    setBusy(true);
+    setError("");
+    setNotice("");
+    try {
+      if (mode === "entrar") {
+        const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+        if (signInError) throw signInError;
+        await navigate({ to: "/", search: {} });
+      } else {
+        const { data, error: signUpError } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { data: { name: name.trim() || "Comercial" } },
+        });
+        if (signUpError) throw signUpError;
+        if (data.session) await navigate({ to: "/", search: {} });
+        else setNotice(`Enviamos um link de confirmação para ${email}. Abra o e-mail e clique no link para entrar.`);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Não foi possível concluir. Confira o e-mail e a senha e tente de novo.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function switchMode() {
+    setMode((current) => (current === "entrar" ? "criar" : "entrar"));
+    setError("");
+    setNotice("");
+  }
+
   return (
     <div className="auth-page">
       <div className="auth-form">
         <Brand />
-        <h1>Entrar</h1>
-        <p>A tela de login por e-mail e senha será concluída quando houver créditos disponíveis.</p>
+        <h1>{mode === "entrar" ? "Entrar" : "Criar conta"}</h1>
+        <p>
+          {mode === "entrar"
+            ? "Acesse a central comercial com o e-mail e a senha do seu time."
+            : "A conta entra com perfil comercial. O administrador ajusta as permissões depois."}
+        </p>
+        {error && <p className="auth-error">{error}</p>}
+        {notice && <p className="auth-notice">{notice}</p>}
+        <form onSubmit={submit}>
+          {mode === "criar" && (
+            <Field label="Nome">
+              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Como você aparece no time" autoComplete="name" />
+            </Field>
+          )}
+          <Field label="E-mail">
+            <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="voce@empresa.com" autoComplete="email" />
+          </Field>
+          <Field label="Senha">
+            <input
+              type="password"
+              required
+              minLength={8}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Mínimo de 8 caracteres"
+              autoComplete={mode === "entrar" ? "current-password" : "new-password"}
+            />
+          </Field>
+          <Button type="submit" className="w-full" disabled={busy}>
+            {busy ? "Aguarde…" : mode === "entrar" ? "Entrar" : "Criar conta"}
+          </Button>
+        </form>
+        <Button variant="ghost" onClick={switchMode}>
+          {mode === "entrar" ? "Não tem conta? Criar" : "Já tem conta? Entrar"}
+        </Button>
         <Link to="/" search={{}} className="auth-link">
           Voltar para a demonstração
         </Link>
