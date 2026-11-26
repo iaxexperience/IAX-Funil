@@ -10,6 +10,23 @@ export const Route = createFileRoute("/auth")({
   component: AuthRoute,
 });
 
+const AUTH_MESSAGES: Record<string, string> = {
+  "invalid login credentials": "E-mail ou senha incorretos.",
+  "email not confirmed": "Confirme seu e-mail antes de entrar. Abra a mensagem que enviamos.",
+  "user already registered": "Esse e-mail já tem conta. Entre ou recupere a senha.",
+  "email could not be validated": "Digite um e-mail válido.",
+  "unable to validate email address": "Digite um e-mail válido.",
+  "password should be at least": "A senha precisa ter pelo menos 8 caracteres.",
+  "for security purposes": "Aguarde alguns minutos antes de tentar de novo.",
+  "rate limit": "Muitas tentativas seguidas. Aguarde um pouco e tente de novo.",
+};
+
+function authMessage(err: unknown): string {
+  const raw = (err instanceof Error ? err.message : String(err ?? "")).toLowerCase();
+  for (const key of Object.keys(AUTH_MESSAGES)) if (raw.includes(key)) return AUTH_MESSAGES[key]!;
+  return "Não foi possível concluir. Confira o e-mail e a senha e tente de novo.";
+}
+
 function AuthRoute() {
   const navigate = useNavigate();
   const [mode, setMode] = useState<"entrar" | "criar">("entrar");
@@ -41,7 +58,7 @@ function AuthRoute() {
         else setNotice(`Enviamos um link de confirmação para ${email}. Abra o e-mail e clique no link para entrar.`);
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Não foi possível concluir. Confira o e-mail e a senha e tente de novo.");
+      setError(authMessage(err));
     } finally {
       setBusy(false);
     }
