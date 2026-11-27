@@ -34,7 +34,7 @@ export const waLink = (msg: string) => `https://wa.me/${IAX_WHATSAPP}?text=${enc
 /* ---------------------------------------------------------------- Produtos
    Os vídeos de cada sistema entram em `video` (ex.: '/videos/findflow.mp4' em public/videos/)
    e, se quiser, uma imagem de capa em `poster`. Enquanto `video` estiver vazio, aparece "Vídeo em breve". */
-type Product = {
+export type Product = {
   slug: string;
   name: string;
   tag: string;
@@ -49,7 +49,7 @@ type Product = {
   poster: string;
 };
 
-const products: Product[] = [
+export const products: Product[] = [
   {
     slug: 'iax-guardian',
     name: 'IAX Guardian',
