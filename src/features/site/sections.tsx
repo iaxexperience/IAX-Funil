@@ -39,16 +39,14 @@ import {
   Filter,
   SquareCheck,
   Sparkles,
-  Headphones,
   Bot,
 } from 'lucide-react';
 
 export const VIDEO_OFFICE_POSTER = 'https://assets.mixkit.co/videos/42664/42664-thumb-720-0.jpg';
 
-/* Números de WhatsApp (somente dígitos, com DDI e DDD). Hoje os dois usam o comercial do iax.info.
-   Se um deles ficar vazio, o botão leva para a seção de contato. */
+/* Número de WhatsApp do comercial (somente dígitos, com DDI e DDD). Se ficar vazio, o botão leva para a seção de contato.
+   O suporte é feito pelo Leo, no botão acima. */
 const WHATSAPP_COMERCIAL = '5583996583281';
-const WHATSAPP_SUPORTE = '5583996583281';
 
 const tones = ['t0', 't1', 't2', 't3', 't4', 't5'];
 function toneOf(name: string) {
@@ -903,17 +901,6 @@ export function ContactFabs() {
         <span className="lp-fab-label">Comercial</span>
         <span className="lp-fab-btn green">
           <MessageCircle size={26} />
-        </span>
-      </a>
-      <a
-        href={waHref(WHATSAPP_SUPORTE, 'Olá! Preciso de suporte da IAX.')}
-        className="lp-fab"
-        aria-label="Falar com o suporte pelo WhatsApp"
-        {...(WHATSAPP_SUPORTE ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      >
-        <span className="lp-fab-label">Suporte</span>
-        <span className="lp-fab-btn blue">
-          <Headphones size={24} />
         </span>
       </a>
     </div>
