@@ -192,9 +192,9 @@ button, a, input, select, textarea { -webkit-tap-highlight-color:transparent; }
 /* Barra superior */
 .topbar { height:56px; flex-shrink:0; display:flex; align-items:center; gap:18px; padding:0 18px; background:var(--topbar); color:oklch(1 0 0); box-shadow:0 1px 4px oklch(0.2 0.08 264 / 0.25); z-index:20; }
 .topbar-brand { flex-shrink:0; }
-/* Logo IAX: recorte do símbolo dentro da imagem 1536x1024 */
+/* Logo IAX: símbolo em PNG transparente (public/img/iax-logo-mark.png) */
 .brand { display:inline-flex; align-items:center; gap:8px; }
-.brand-logo { display:block; height:34px; aspect-ratio:1195 / 505; background:url('/img/iax-logo.webp') no-repeat 58.6% 27% / 128.5% auto; }
+.brand-logo { display:block; height:34px; aspect-ratio:363 / 160; background:url('/img/iax-logo-mark.png') no-repeat center / contain; }
 .brand-sac { font-family:var(--font-display); font-weight:800; font-size:12px; letter-spacing:.14em; line-height:1; color:oklch(1 0 0); padding:5px 8px 5px 9px; border-radius:6px; background:linear-gradient(135deg, oklch(0.66 0.18 240), oklch(0.45 0.2 264)); }
 .brand.light { background:oklch(1 0 0); padding:5px 8px 5px 10px; border-radius:10px; box-shadow:0 2px 8px oklch(0.15 0.08 264 / 0.2); }
 .brand.light .brand-logo { height:24px; }
