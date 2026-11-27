@@ -33,8 +33,16 @@ const PHOTO_ANALYTICS = photo(7693706, 800);
 const PHOTO_SUIT = photo(17582358, 800);
 const LEO = '/img/leo-assistente.webp';
 
-function Logo({ className = '' }: { className?: string }) {
-  return <img className={`sk-logo ${className}`} src="/img/iax-logo-completa.png" alt="IAX · Inteligência Artificial Experience" width={1285} height={727} />;
+function Logo({ className = '', dark = false }: { className?: string; dark?: boolean }) {
+  return (
+    <img
+      className={`sk-logo ${className}`}
+      src={dark ? '/img/iax-logo-completa-hero.png' : '/img/iax-logo-completa.png'}
+      alt="IAX · Inteligência Artificial Experience"
+      width={1285}
+      height={727}
+    />
+  );
 }
 
 /** Botão com seta, no estilo da página de referência. */
@@ -49,6 +57,13 @@ function Cta({ href, children, variant = 'solid', external = false }: { href: st
 /* -------------------------------------------------------------------- Menu */
 function Nav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
   const links = [
     ['#sistemas', 'Sistemas'],
     ['#solucoes', 'Soluções'],
@@ -57,40 +72,44 @@ function Nav() {
     ['#contato', 'Contato'],
   ];
   return (
-    <header className="sk-header">
+    <header className={`sk-header ${scrolled ? 'scrolled' : ''}`}>
       <div className="sk-topbar">
         <div className="sk-wrap sk-topbar-inner">
           <a href={`mailto:${IAX_EMAIL}`}>
-            <Mail size={14} /> {IAX_EMAIL}
+            <Mail size={13} /> {IAX_EMAIL}
           </a>
           <a href={waLink('Olá! Quero falar com a IAX.')} target="_blank" rel="noopener noreferrer">
-            <Phone size={14} /> {IAX_PHONE}
+            <Phone size={13} /> {IAX_PHONE}
           </a>
-          <Link to="/auth">
-            <LogIn size={14} /> Área do cliente
+          <Link to="/auth" className="sk-topbar-client">
+            <LogIn size={13} /> Área do cliente
           </Link>
         </div>
       </div>
-      <div className="sk-wrap">
-        <nav className="sk-nav" aria-label="Menu principal">
-          <a href="#topo" className="sk-nav-logo" aria-label="IAX: início">
-            <Logo />
-          </a>
-          <div className={`sk-nav-links ${open ? 'open' : ''}`}>
-            {links.map(([href, label]) => (
-              <a key={href} href={href} onClick={() => setOpen(false)}>
-                {label}
-              </a>
-            ))}
-            <Link to="/auth" className="sk-nav-login">
-              Entrar
-            </Link>
-          </div>
-          <Cta href="#contato">Fale com especialista</Cta>
-          <button type="button" className="sk-burger" aria-label={open ? 'Fechar menu' : 'Abrir menu'} aria-expanded={open} onClick={() => setOpen((v) => !v)}>
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </nav>
+      <div className="sk-nav-bar">
+        <div className="sk-wrap">
+          <nav className="sk-nav" aria-label="Menu principal">
+            <a href="#topo" className="sk-nav-logo" aria-label="IAX: início">
+              <Logo dark />
+            </a>
+            <div className={`sk-nav-links ${open ? 'open' : ''}`}>
+              {links.map(([href, label]) => (
+                <a key={href} href={href} onClick={() => setOpen(false)}>
+                  {label}
+                </a>
+              ))}
+              <Link to="/auth" className="sk-nav-login" onClick={() => setOpen(false)}>
+                Área do cliente
+              </Link>
+            </div>
+            <Cta href="#contato">
+              Fale com especialista <ArrowRight size={15} />
+            </Cta>
+            <button type="button" className="sk-burger" aria-label={open ? 'Fechar menu' : 'Abrir menu'} aria-expanded={open} onClick={() => setOpen((v) => !v)}>
+              {open ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </nav>
+        </div>
       </div>
     </header>
   );
