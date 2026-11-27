@@ -22,8 +22,24 @@ import {
   FileText,
   Clock,
   Check,
+  Headphones,
+  BookOpen,
+  ClipboardList,
 } from 'lucide-react';
 import { Brand } from '@/features/sales/shared';
+
+// Vídeos gratuitos do Mixkit (Mixkit Stock Video Free License: uso comercial liberado, sem atribuição).
+const VIDEO_OFFICE = 'https://assets.mixkit.co/videos/42664/42664-720.mp4';
+const VIDEO_OFFICE_POSTER = 'https://assets.mixkit.co/videos/42664/42664-thumb-720-0.jpg';
+const VIDEO_PHONE = 'https://assets.mixkit.co/videos/43270/43270-720.mp4';
+const VIDEO_PHONE_POSTER = 'https://assets.mixkit.co/videos/43270/43270-thumb-720-0.jpg';
+
+const leoPills = [
+  { icon: Headphones, label: 'Suporte 24h' },
+  { icon: Zap, label: 'Respostas inteligentes' },
+  { icon: BookOpen, label: 'Manuais na hora' },
+  { icon: ClipboardList, label: 'Meus chamados' },
+];
 
 const features = [
   { icon: MessageCircle, title: 'Inbox unificada', text: 'WhatsApp e Instagram em uma só tela. Toda a equipe atende do mesmo lugar, sem perder o histórico.' },
@@ -426,7 +442,7 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section className="lp-cta">
+        <section className="lp-cta" id="contato">
           <div className="lp-container lp-cta-box">
             <div>
               <h2>Pronto para não perder mais nenhum lead?</h2>
@@ -458,7 +474,7 @@ export function LandingPage() {
             <Link to="/" search={{}}>Demonstração</Link>
           </div>
         </div>
-        <div className="lp-container lp-copy">© {new Date().getFullYear()} IAX SAC. Todos os direitos reservados.</div>
+        <div className="lp-container lp-copy" style={{ paddingRight: 96 }}>© {new Date().getFullYear()} IAX SAC. Todos os direitos reservados.</div>
       </footer>
     </div>
   );
