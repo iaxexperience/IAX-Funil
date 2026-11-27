@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as CrmRouteImport } from './routes/crm'
 import { Route as FunilRouteImport } from './routes/funil'
 import { Route as InboxRouteImport } from './routes/inbox'
 import { Route as SiteRouteImport } from './routes/site'
@@ -29,6 +30,11 @@ const AgendaRoute = AgendaRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmRoute = CrmRouteImport.update({
+  id: '/crm',
+  path: '/crm',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FunilRoute = FunilRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
   '/auth': typeof AuthRoute
+  '/crm': typeof CrmRoute
   '/funil': typeof FunilRoute
   '/inbox': typeof InboxRoute
   '/site': typeof SiteRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
   '/auth': typeof AuthRoute
+  '/crm': typeof CrmRoute
   '/funil': typeof FunilRoute
   '/inbox': typeof InboxRoute
   '/site': typeof SiteRoute
@@ -68,22 +76,32 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/agenda': typeof AgendaRoute
   '/auth': typeof AuthRoute
+  '/crm': typeof CrmRoute
   '/funil': typeof FunilRoute
   '/inbox': typeof InboxRoute
   '/site': typeof SiteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/agenda' | '/auth' | '/funil' | '/inbox' | '/site'
+  fullPaths: '/' | '/agenda' | '/auth' | '/crm' | '/funil' | '/inbox' | '/site'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/agenda' | '/auth' | '/funil' | '/inbox' | '/site'
-  id: '__root__' | '/' | '/agenda' | '/auth' | '/funil' | '/inbox' | '/site'
+  to: '/' | '/agenda' | '/auth' | '/crm' | '/funil' | '/inbox' | '/site'
+  id:
+    | '__root__'
+    | '/'
+    | '/agenda'
+    | '/auth'
+    | '/crm'
+    | '/funil'
+    | '/inbox'
+    | '/site'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgendaRoute: typeof AgendaRoute
   AuthRoute: typeof AuthRoute
+  CrmRoute: typeof CrmRoute
   FunilRoute: typeof FunilRoute
   InboxRoute: typeof InboxRoute
   SiteRoute: typeof SiteRoute
@@ -110,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crm': {
+      id: '/crm'
+      path: '/crm'
+      fullPath: '/crm'
+      preLoaderRoute: typeof CrmRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/funil': {
@@ -140,6 +165,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgendaRoute: AgendaRoute,
   AuthRoute: AuthRoute,
+  CrmRoute: CrmRoute,
   FunilRoute: FunilRoute,
   InboxRoute: InboxRoute,
   SiteRoute: SiteRoute,
