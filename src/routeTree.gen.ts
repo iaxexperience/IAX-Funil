@@ -15,6 +15,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as CrmRouteImport } from './routes/crm'
 import { Route as FunilRouteImport } from './routes/funil'
 import { Route as InboxRouteImport } from './routes/inbox'
+import { Route as IntegracoesRouteImport } from './routes/integracoes'
 import { Route as SiteRouteImport } from './routes/site'
 
 const IndexRoute = IndexRouteImport.update({
@@ -47,6 +48,11 @@ const InboxRoute = InboxRouteImport.update({
   path: '/inbox',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IntegracoesRoute = IntegracoesRouteImport.update({
+  id: '/integracoes',
+  path: '/integracoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SiteRoute = SiteRouteImport.update({
   id: '/site',
   path: '/site',
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/crm': typeof CrmRoute
   '/funil': typeof FunilRoute
   '/inbox': typeof InboxRoute
+  '/integracoes': typeof IntegracoesRoute
   '/site': typeof SiteRoute
 }
 export interface FileRoutesByTo {
@@ -69,6 +76,7 @@ export interface FileRoutesByTo {
   '/crm': typeof CrmRoute
   '/funil': typeof FunilRoute
   '/inbox': typeof InboxRoute
+  '/integracoes': typeof IntegracoesRoute
   '/site': typeof SiteRoute
 }
 export interface FileRoutesById {
@@ -79,13 +87,30 @@ export interface FileRoutesById {
   '/crm': typeof CrmRoute
   '/funil': typeof FunilRoute
   '/inbox': typeof InboxRoute
+  '/integracoes': typeof IntegracoesRoute
   '/site': typeof SiteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/agenda' | '/auth' | '/crm' | '/funil' | '/inbox' | '/site'
+  fullPaths:
+    | '/'
+    | '/agenda'
+    | '/auth'
+    | '/crm'
+    | '/funil'
+    | '/inbox'
+    | '/integracoes'
+    | '/site'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/agenda' | '/auth' | '/crm' | '/funil' | '/inbox' | '/site'
+  to:
+    | '/'
+    | '/agenda'
+    | '/auth'
+    | '/crm'
+    | '/funil'
+    | '/inbox'
+    | '/integracoes'
+    | '/site'
   id:
     | '__root__'
     | '/'
@@ -94,6 +119,7 @@ export interface FileRouteTypes {
     | '/crm'
     | '/funil'
     | '/inbox'
+    | '/integracoes'
     | '/site'
   fileRoutesById: FileRoutesById
 }
@@ -104,6 +130,7 @@ export interface RootRouteChildren {
   CrmRoute: typeof CrmRoute
   FunilRoute: typeof FunilRoute
   InboxRoute: typeof InboxRoute
+  IntegracoesRoute: typeof IntegracoesRoute
   SiteRoute: typeof SiteRoute
 }
 
@@ -151,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InboxRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/integracoes': {
+      id: '/integracoes'
+      path: '/integracoes'
+      fullPath: '/integracoes'
+      preLoaderRoute: typeof IntegracoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/site': {
       id: '/site'
       path: '/site'
@@ -168,6 +202,7 @@ const rootRouteChildren: RootRouteChildren = {
   CrmRoute: CrmRoute,
   FunilRoute: FunilRoute,
   InboxRoute: InboxRoute,
+  IntegracoesRoute: IntegracoesRoute,
   SiteRoute: SiteRoute,
 }
 export const routeTree = rootRouteImport

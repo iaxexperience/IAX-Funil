@@ -31,7 +31,7 @@ import { LeadForm, ActivityForm } from './forms';
 import { stages, dateLabel, timeLabel, overdue, icpScore, type Lead } from './model';
 
 type Status = 'Novo' | 'Contatado' | 'Qualificado' | 'Convertido' | 'Perdido';
-export function leadStatus(l: Lead): Status {
+function leadStatus(l: Lead): Status {
   if (l.stage === 0) return 'Novo';
   if (l.stage === 1) return 'Contatado';
   if (l.stage === 7) return 'Convertido';

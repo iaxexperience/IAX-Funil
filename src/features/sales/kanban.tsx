@@ -20,7 +20,7 @@ import { LeadPanel } from './lead-panel';
 import { stages, icpScore, icpLabel, overdue, dateLabel, timeLabel, type Lead } from './model';
 
 /** Cor de cada etapa do funil, na mesma ordem de `stages`. */
-export const stageHues = [255, 220, 195, 165, 140, 85, 55, 150, 20];
+const stageHues = [255, 220, 195, 165, 140, 85, 55, 150, 20];
 
 function LeadCard({ lead, ownerName, onOpen, ghost = false }: { lead: Lead; ownerName: string; onOpen?: () => void; ghost?: boolean }) {
   const score = icpScore(lead.qualification);
