@@ -1454,3 +1454,9 @@ html:has(.lp) { scroll-behavior:smooth; scroll-padding-top:80px; }
   .ix-hero { min-height:0; padding:64px 16px 72px; }
   .ix-hero-btn { flex:1 1 100%; justify-content:center; }
 }
+
+/* Logo nova 3D no topo (PNG com brilho) e assinatura no estilo da logo */
+.ix-hero-logo3d { display:block; width:min(560px, 82vw); height:auto; margin:-10px 0 -18px; }
+.ix-hero .ix-hero-tagline { position:relative; color:oklch(1 0 0); font-weight:600; padding-bottom:16px; margin-bottom:14px; }
+.ix-hero .ix-hero-tagline span { color:oklch(0.66 0.2 258); }
+.ix-hero .ix-hero-tagline:after { content:''; position:absolute; left:12%; right:12%; bottom:0; height:4px; border-radius:50%; background:linear-gradient(90deg, transparent, oklch(0.62 0.21 258) 30%, oklch(0.72 0.16 235) 60%, transparent); filter:blur(.3px); }
