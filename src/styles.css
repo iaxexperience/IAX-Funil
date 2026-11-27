@@ -156,6 +156,8 @@
 
 @theme inline {
  --font-sans: 'Inter', system-ui, sans-serif;
+ --font-display: 'Montserrat', 'Inter', system-ui, sans-serif;
+ --font-body: 'Raleway', 'Inter', system-ui, sans-serif;
  --color-topbar: var(--topbar);
  --color-success: var(--success);
  --color-success-soft: var(--success-soft);
@@ -190,13 +192,13 @@ button, a, input, select, textarea { -webkit-tap-highlight-color:transparent; }
 /* Barra superior */
 .topbar { height:56px; flex-shrink:0; display:flex; align-items:center; gap:18px; padding:0 18px; background:var(--topbar); color:oklch(1 0 0); box-shadow:0 1px 4px oklch(0.2 0.08 264 / 0.25); z-index:20; }
 .topbar-brand { flex-shrink:0; }
-.brand { display:flex; align-items:center; gap:9px; color:var(--primary); padding:0 8px; }
-.brand.light { color:oklch(1 0 0); padding:0; }
-.brand-mark { height:30px; width:27px; }
-.brand-name { font-size:21px; font-weight:750; line-height:1; }
-.brand-sub { display:block; font-size:9px; font-weight:600; letter-spacing:3px; margin-top:5px; color:var(--muted-foreground); }
-.brand.light .brand-name { font-size:18px; display:flex; align-items:baseline; gap:6px; }
-.brand.light .brand-sub { display:inline; margin:0; color:oklch(1 0 0 / 0.65); font-size:9px; letter-spacing:2px; }
+/* Logo IAX: recorte do símbolo dentro da imagem 1536x1024 */
+.brand { display:inline-flex; align-items:center; gap:8px; }
+.brand-logo { display:block; height:34px; aspect-ratio:1195 / 505; background:url('/img/iax-logo.webp') no-repeat 58.6% 27% / 128.5% auto; }
+.brand-sac { font-family:var(--font-display); font-weight:800; font-size:12px; letter-spacing:.14em; line-height:1; color:oklch(1 0 0); padding:5px 8px 5px 9px; border-radius:6px; background:linear-gradient(135deg, oklch(0.66 0.18 240), oklch(0.45 0.2 264)); }
+.brand.light { background:oklch(1 0 0); padding:5px 8px 5px 10px; border-radius:10px; box-shadow:0 2px 8px oklch(0.15 0.08 264 / 0.2); }
+.brand.light .brand-logo { height:24px; }
+.brand.light .brand-sac { font-size:10px; padding:4px 6px 4px 7px; }
 .topbar-nav { display:flex; align-items:center; gap:4px; flex:1; justify-content:center; }
 .top-link { position:relative; display:flex; align-items:center; gap:8px; height:40px; padding:0 14px; border-radius:8px; color:oklch(1 0 0 / 0.82); font-size:13px; font-weight:550; transition:background .15s,color .15s; }
 .top-link:hover { background:oklch(1 0 0 / 0.1); color:oklch(1 0 0); }
@@ -604,3 +606,85 @@ html:has(.lp) { scroll-behavior:smooth; scroll-padding-top:80px; }
   .lp-footer-grid { grid-template-columns:1fr 1fr; }
   .lp-footer-grid > :first-child { grid-column:1 / -1; }
 }
+
+/* ===== Landing v2: IAX SAC (tipografia, hero escuro com vídeo, Leo) ===== */
+.lp { font-family:var(--font-body); font-variant-numeric:lining-nums; --lp-navy: oklch(0.2 0.07 262); --lp-cyan: oklch(0.78 0.14 225); }
+.lp h1, .lp h2, .lp h3, .lp h4, .lp-btn, .lp-eyebrow, .lp-stats strong, .lp-faq-item button, .lp-links, .lp-login, .lp-feature h3, .lp-step > span { font-family:var(--font-display); }
+.lp h1, .lp h2 { font-weight:700; letter-spacing:-0.025em; }
+.lp-section p, .lp-hero-copy > p { font-weight:500; }
+.lp-grad { background:linear-gradient(100deg, var(--lp-cyan), oklch(0.6 0.21 258)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+/* Nav */
+.lp-links { gap:24px; }
+.lp-nav .brand-logo { height:36px; }
+/* Hero escuro com vídeo de fundo */
+.lp-hero { position:relative; isolation:isolate; overflow:hidden; background:var(--lp-navy); color:oklch(1 0 0); padding:88px 0 104px; }
+.lp-hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.3; z-index:-2; filter:saturate(.7); }
+.lp-hero:before { content:''; position:absolute; inset:0; z-index:-1; background:radial-gradient(900px 480px at 82% 20%, oklch(0.55 0.2 258 / 0.45), transparent 65%), linear-gradient(90deg, oklch(0.17 0.07 262 / 0.97) 0%, oklch(0.18 0.07 262 / 0.86) 45%, oklch(0.2 0.08 262 / 0.6) 100%); }
+.lp-hero:after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:64px; z-index:-1; background:linear-gradient(to bottom, transparent, oklch(0.2 0.07 262 / 0.6)); }
+.lp-hero h1 { color:oklch(1 0 0); }
+.lp-hero h1 span { background:linear-gradient(100deg, var(--lp-cyan), oklch(0.66 0.19 255)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.lp-hero-copy > p { color:oklch(1 0 0 / 0.78); }
+.lp-hero .lp-eyebrow { background:oklch(1 0 0 / 0.1); color:oklch(0.88 0.08 225); border:1px solid oklch(1 0 0 / 0.14); }
+.lp-hero-checks { color:oklch(1 0 0 / 0.72); }
+.lp-hero-checks svg { color:var(--lp-cyan); }
+.lp .lp-btn.primary { background:linear-gradient(100deg, oklch(0.6 0.2 255), oklch(0.5 0.21 264)); }
+.lp .lp-btn.ghost-light { color:oklch(1 0 0); border:1.5px solid oklch(1 0 0 / 0.35); background:oklch(1 0 0 / 0.06); backdrop-filter:blur(6px); }
+.lp .lp-btn.ghost-light:hover { background:oklch(1 0 0 / 0.14); }
+.lp-hero .lp-mock { box-shadow:0 40px 90px oklch(0.05 0.05 262 / 0.6), 0 0 0 1px oklch(1 0 0 / 0.08); }
+/* Seção do Leo */
+.lp-leo { background:linear-gradient(180deg, var(--card), var(--lp-soft)); }
+.lp-leo-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
+.lp-leo-art { position:relative; margin:0; }
+.lp-leo-art:before { content:''; position:absolute; inset:8% -4% -4% 8%; border-radius:32px; background:linear-gradient(135deg, oklch(0.62 0.2 255), oklch(0.4 0.18 266)); transform:rotate(3deg); z-index:0; }
+.lp-leo-art img { position:relative; z-index:1; display:block; width:100%; height:auto; border-radius:28px; box-shadow:0 30px 70px oklch(0.25 0.1 262 / 0.3); }
+.lp-leo-badge { position:absolute; z-index:2; left:-24px; bottom:40px; display:flex; align-items:center; gap:12px; background:var(--card); border-radius:16px; padding:12px 18px 12px 12px; box-shadow:0 18px 40px oklch(0.25 0.08 262 / 0.22); animation:lp-float 5s ease-in-out infinite; }
+.lp-leo-badge strong { display:block; font-family:var(--font-display); font-size:14px; }
+.lp-leo-badge small { font-size:12px; color:var(--muted-foreground); }
+.lp-leo-face, .lp-leo-fab-face { display:block; border-radius:50%; background:oklch(0.6 0.15 250) url('/img/leo-assistente.webp') no-repeat 22% 8% / 320% auto; flex-shrink:0; }
+.lp-leo-face { width:44px; height:44px; box-shadow:0 0 0 3px oklch(0.92 0.04 262); }
+.lp-leo-copy h2 { margin-top:0; }
+.lp-leo-pills { list-style:none; padding:0; margin:28px 0 32px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.lp-leo-pills li { display:flex; align-items:center; gap:12px; font-family:var(--font-display); font-weight:600; font-size:15px; background:var(--card); border:1px solid oklch(0.88 0.04 262); border-radius:14px; padding:12px 14px; box-shadow:var(--shadow-soft); }
+.lp-leo-pills li > span { width:36px; height:36px; flex-shrink:0; border-radius:10px; display:grid; place-items:center; color:oklch(1 0 0); background:linear-gradient(135deg, oklch(0.62 0.2 255), oklch(0.45 0.2 264)); }
+/* IA: celular com vídeo */
+.lp-ai-visual { position:relative; display:flex; justify-content:center; padding:20px 0; }
+.lp-phone { width:260px; aspect-ratio:9/18.5; border-radius:40px; padding:10px; background:oklch(0.15 0.03 262); box-shadow:0 40px 80px oklch(0.1 0.08 264 / 0.5), inset 0 0 0 2px oklch(1 0 0 / 0.12); }
+.lp-phone video { width:100%; height:100%; object-fit:cover; border-radius:31px; display:block; background:oklch(0.3 0.05 262); }
+.lp-ai-question { position:absolute; top:44px; left:0; max-width:240px; font-size:13px; padding:10px 13px; box-shadow:0 14px 30px oklch(0.1 0.08 264 / 0.35); }
+.lp-ai-visual .lp-ai-suggest { position:absolute; right:0; bottom:28px; max-width:290px; box-shadow:0 18px 40px oklch(0.1 0.08 264 / 0.4); border-style:solid; border-color:oklch(0.85 0.06 262); }
+/* Botão flutuante do Leo */
+.lp-leo-fab { position:fixed; right:22px; bottom:22px; z-index:60; display:flex; align-items:center; gap:12px; }
+.lp-leo-fab-face { width:64px; height:64px; box-shadow:0 0 0 3px oklch(1 0 0), 0 12px 30px oklch(0.25 0.12 262 / 0.45); transition:transform .2s; }
+.lp-leo-fab:hover .lp-leo-fab-face { transform:scale(1.06); }
+.lp-leo-fab-dot { position:absolute; right:2px; bottom:4px; width:16px; height:16px; border-radius:50%; background:var(--success); border:3px solid oklch(1 0 0); }
+.lp-leo-fab-tip { font-size:14px; background:var(--card); color:var(--lp-ink); padding:10px 14px; border-radius:14px 14px 4px 14px; box-shadow:0 12px 30px oklch(0.25 0.08 262 / 0.2); white-space:nowrap; animation:lp-tip 7s ease-in-out infinite; }
+.lp-leo-fab-tip b { color:var(--primary); }
+@keyframes lp-tip { 0%,8% { opacity:0; transform:translateX(8px); } 14%,70% { opacity:1; transform:none; } 78%,100% { opacity:0; transform:translateX(8px); } }
+.lp-copy { padding-right:100px; }
+@media(max-width:1100px) { .lp-links { gap:18px; font-size:14px; } .lp-links a[href="#ia"] { display:none; } }
+@media(max-width:980px) {
+  .lp-leo-grid { grid-template-columns:1fr; gap:48px; }
+  .lp-leo-art { max-width:520px; margin:0 auto; }
+  .lp-burger { display:block; }
+  .lp .lp-login { display:none; }
+  .lp-nav-cta { margin-left:auto; }
+  .lp-links { display:none; position:absolute; top:72px; left:0; right:0; flex-direction:column; gap:0; background:var(--card); border-bottom:1px solid var(--border); padding:8px 24px 16px; box-shadow:0 12px 24px oklch(0.3 0.05 262 / 0.1); }
+  .lp-links.open { display:flex; }
+  .lp-links a, .lp-links a[href="#ia"] { display:block; padding:12px 0; border-bottom:1px solid var(--border); }
+  .lp .lp-link-login { display:block; color:var(--primary); font-weight:600; border:0; }
+}
+@media(max-width:760px) {
+  .lp-hero { padding:48px 0 72px; }
+  .lp-links { top:64px; padding:8px 16px 16px; }
+  .lp-nav .brand-logo { height:30px; }
+  .lp-leo-badge { left:8px; bottom:16px; }
+  .lp-leo-pills { grid-template-columns:1fr; }
+  .lp-leo-pills li { font-size:14px; }
+  .lp-ai-visual { flex-direction:column; align-items:center; gap:12px; }
+  .lp-ai-question, .lp-ai-visual .lp-ai-suggest { position:static; max-width:100%; }
+  .lp-phone { width:220px; }
+  .lp-leo-fab-tip { display:none; }
+  .lp-leo-fab-face { width:56px; height:56px; }
+  .lp-copy { padding-right:80px; }
+}
+@media(prefers-reduced-motion:reduce) { .lp-hero-video, .lp-phone video { display:none; } }
