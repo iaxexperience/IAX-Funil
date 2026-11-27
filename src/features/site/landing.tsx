@@ -27,6 +27,7 @@ import {
   ClipboardList,
 } from 'lucide-react';
 import { Brand } from '@/features/sales/shared';
+import { SolutionsSection, ChatbotSection, CrmSection, LeadsSection, FeatureCardsSection, FunnelSection, AgendaSection, IntegrationsSection, ContactFabs } from './sections';
 
 // Vídeos gratuitos do Mixkit (Mixkit Stock Video Free License: uso comercial liberado, sem atribuição).
 const VIDEO_OFFICE = 'https://assets.mixkit.co/videos/42664/42664-720.mp4';
@@ -39,21 +40,6 @@ const leoPills = [
   { icon: Zap, label: 'Respostas inteligentes' },
   { icon: BookOpen, label: 'Manuais na hora' },
   { icon: ClipboardList, label: 'Meus chamados' },
-];
-
-const features = [
-  { icon: MessageCircle, title: 'Inbox unificada', text: 'WhatsApp e Instagram em uma só tela. Toda a equipe atende do mesmo lugar, sem perder o histórico.' },
-  { icon: Columns3, title: 'Funil de vendas visual', text: 'Arraste cada lead pelas etapas e veja na hora onde estão as oportunidades e os gargalos.' },
-  { icon: CalendarDays, title: 'Agenda e follow-ups', text: 'Próxima ação sempre definida. Alertas de atraso para nenhum cliente ficar sem resposta.' },
-  { icon: Users, title: 'Equipe e permissões', text: 'Distribua leads por responsável e controle o que cada vendedor pode ver e editar.' },
-  { icon: FileText, title: 'Modelos de mensagem', text: 'Respostas prontas para os momentos-chave da venda. Mais agilidade, mesma qualidade.' },
-  { icon: BarChart3, title: 'Relatórios em tempo real', text: 'Taxa de conversão por etapa, origem dos leads e desempenho de cada vendedor.' },
-];
-
-const steps = [
-  { n: '01', title: 'Conecte seus canais', text: 'Ligue o WhatsApp e o Instagram da empresa em poucos minutos.' },
-  { n: '02', title: 'Organize o funil', text: 'Cada conversa vira um lead com etapa, responsável e próxima ação.' },
-  { n: '03', title: 'Venda mais', text: 'Acompanhe os números e saiba exatamente onde agir para fechar.' },
 ];
 
 const faqs = [
@@ -167,16 +153,18 @@ export function LandingPage() {
             <Brand />
           </a>
           <nav className={`lp-links ${menu ? 'open' : ''}`} aria-label="Seções">
-            <a href="#leo" onClick={() => setMenu(false)}>Assistente Leo</a>
-            <a href="#recursos" onClick={() => setMenu(false)}>Recursos</a>
-            <a href="#ia" onClick={() => setMenu(false)}>Inteligência artificial</a>
-            <a href="#funil" onClick={() => setMenu(false)}>Funil de vendas</a>
-            <a href="#faq" onClick={() => setMenu(false)}>Dúvidas</a>
+            <a href="#solucoes" onClick={() => setMenu(false)}>Soluções</a>
+            <a href="#chatbot" onClick={() => setMenu(false)}>Chatbot</a>
+            <a href="#crm" onClick={() => setMenu(false)}>CRM</a>
+            <a href="#funil" onClick={() => setMenu(false)}>Funil</a>
+            <a href="#ia" onClick={() => setMenu(false)}>IA</a>
+            <a href="#integracoes" onClick={() => setMenu(false)}>Integrações</a>
             <Link to="/auth" className="lp-link-login">Entrar</Link>
           </nav>
           <div className="lp-nav-cta">
             <Link to="/auth" className="lp-login">Entrar</Link>
-            <Link to="/auth" className="lp-btn primary small">Começar</Link>
+            <a href="#contato" className="lp-btn primary small lp-hide-sm">Fale com o consultor</a>
+            <Link to="/auth" className="lp-btn green small">Começar</Link>
             <button type="button" className="lp-burger" aria-label={menu ? 'Fechar menu' : 'Abrir menu'} onClick={() => setMenu((v) => !v)}>
               {menu ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -257,6 +245,8 @@ export function LandingPage() {
           </div>
         </section>
 
+        <SolutionsSection />
+
         <section className="lp-section lp-leo" id="leo">
           <div className="lp-container lp-leo-grid">
             <figure className="lp-leo-art">
@@ -299,26 +289,18 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section className="lp-section" id="recursos">
-          <div className="lp-container">
-            <div className="lp-heading">
-              <span className="lp-eyebrow">Recursos</span>
-              <h2>Tudo o que sua equipe comercial precisa</h2>
-              <p>Do primeiro “olá” ao contrato assinado, cada etapa da venda organizada e visível para todo o time.</p>
-            </div>
-            <div className="lp-feature-grid">
-              {features.map((f) => (
-                <article className="lp-feature" key={f.title}>
-                  <span className="lp-feature-icon">
-                    <f.icon size={22} />
-                  </span>
-                  <h3>{f.title}</h3>
-                  <p>{f.text}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <ChatbotSection />
+
+        <CrmSection />
+
+        <LeadsSection />
+
+        <FeatureCardsSection />
+
+        <FunnelSection />
+
+        <AgendaSection />
+
 
         <section className="lp-section lp-ai" id="ia">
           <div className="lp-container lp-split">
@@ -370,47 +352,8 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section className="lp-section" id="funil">
-          <div className="lp-container lp-split reverse">
-            <div className="lp-kanban" aria-hidden="true">
-              {[
-                ['Novo lead', ['Potiguar Distribuidora', 'SuaveLar']],
-                ['Demonstração', ['Brisa Produtos']],
-                ['Proposta', ['CloroMax', 'Alvo Detergentes']],
-                ['Ganho', ['LimpMais Química']],
-              ].map(([title, cards], i) => (
-                <div className="lp-kcol" key={title as string}>
-                  <h4>
-                    <i className={`d${i}`} />
-                    {title as string}
-                  </h4>
-                  {(cards as string[]).map((c) => (
-                    <div className="lp-kcard" key={c}>
-                      <strong>{c}</strong>
-                      <small>Próxima ação definida</small>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-            <div>
-              <span className="lp-eyebrow">Funil de vendas</span>
-              <h2>Veja cada oportunidade no lugar certo</h2>
-              <p>Arraste os leads entre as etapas, defina a próxima ação e saiba quanto há em negociação em cada fase do funil.</p>
-              <div className="lp-steps">
-                {steps.map((s) => (
-                  <div className="lp-step" key={s.n}>
-                    <span>{s.n}</span>
-                    <div>
-                      <h3>{s.title}</h3>
-                      <p>{s.text}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <IntegrationsSection />
+
 
         <section className="lp-stats">
           <div className="lp-container lp-stats-grid">
@@ -478,13 +421,7 @@ export function LandingPage() {
         <div className="lp-container lp-copy">© {new Date().getFullYear()} IAX SAC. Todos os direitos reservados.</div>
       </footer>
 
-      <a href="#leo" className="lp-leo-fab" aria-label="Falar com o Leo, assistente virtual">
-        <span className="lp-leo-fab-tip">
-          Olá! Sou o <b>Leo</b>. Posso ajudar?
-        </span>
-        <span className="lp-leo-fab-face" aria-hidden="true" />
-        <span className="lp-leo-fab-dot" aria-hidden="true" />
-      </a>
+      <ContactFabs />
     </div>
   );
 }
