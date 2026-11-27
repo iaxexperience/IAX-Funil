@@ -5,7 +5,7 @@ import { LeadForm } from "@/features/sales/forms";
 import { meta } from "@/features/sales/model";
 
 export const Route = createFileRoute("/funil")({
-  head: () => meta("Funil", "Pipeline comercial do FindFlow Sales."),
+  head: () => meta("Funil", "Pipeline comercial do IAX SAC."),
   component: FunilRoute,
 });
 

@@ -9,7 +9,7 @@ export const Route = createFileRoute("/")({
     const lead = typeof search["lead"] === "string" ? search["lead"] : undefined;
     return lead === undefined ? {} : { lead };
   },
-  head: () => meta("Inbox", "Central de conversas WhatsApp e Instagram do FindFlow Sales."),
+  head: () => meta("Inbox", "Central de conversas WhatsApp e Instagram do IAX SAC."),
   component: Index,
 });
 

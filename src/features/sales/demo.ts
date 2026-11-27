@@ -2,7 +2,7 @@ import type { Lead, Activity, Message, Note, Profile } from './model';
 const now = new Date();
 const at = (hours: number) => new Date(now.getTime()+hours*3600000).toISOString();
 const rows = [
- ['Brisa Produtos de Limpeza','Marcos Oliveira','João Pessoa','PB','WhatsApp','Anúncio',4,'Controle de produção e estoque','Planilhas','Demonstração do FindFlow',3,2,5],
+ ['Brisa Produtos de Limpeza','Marcos Oliveira','João Pessoa','PB','WhatsApp','Anúncio',4,'Controle de produção e estoque','Planilhas','Demonstração do IAX SAC',3,2,5],
  ['Nordeste Saneantes','Ana Paula Santos','Campina Grande','PB','Instagram','Instagram',2,'Rastreabilidade de lotes','Sistema próprio','Diagnóstico comercial',24,1,4],
  ['CloroMax Indústria','Ricardo Almeida','Recife','PE','WhatsApp','Indicação',5,'Emissão de notas e custos','ERP legado','Enviar proposta revisada',-24,0,5],
  ['Potiguar Distribuidora','Fernanda Costa','Natal','RN','WhatsApp','Prospecção',1,'Gestão de pedidos','Planilhas','Ligação de qualificação',2,0,2],
@@ -16,10 +16,10 @@ export const demoLeads: Lead[] = rows.map((r,i)=>({id:`00000000-0000-4000-8000-$
 export const demoProfiles: Profile[] = [{id:'demo-1',name:'Camila Andrade'},{id:'demo-2',name:'Lucas Martins'}];
 export const demoActivities: Activity[] = demoLeads.filter(l=>l.next_at).map((l,i)=>({id:`activity-${i}`,lead_id:l.id,type:l.stage===4?'Demonstração':l.stage===2?'Diagnóstico':'Follow-up',title:l.next_action,due_at:l.next_at??at(3),owner_id:l.owner_id,status:'pendente',observation:'Alinhar as necessidades da fábrica e os próximos passos.',created_at:at(-24)}));
 export const demoMessages: Message[] = demoLeads.flatMap(l=>[
- {id:`${l.id}-1`,lead_id:l.id,conversation_id:null,content:`Olá, ${l.decision_maker.split(' ')[0]}! Sou a Camila, do FindFlow. Como vocês organizam a gestão da fábrica hoje?`,direction:'outbound',status:'simulated',created_at:at(-2)},
+ {id:`${l.id}-1`,lead_id:l.id,conversation_id:null,content:`Olá, ${l.decision_maker.split(' ')[0]}! Sou a Camila, da IAX. Como vocês organizam a gestão da fábrica hoje?`,direction:'outbound',status:'simulated',created_at:at(-2)},
  {id:`${l.id}-2`,lead_id:l.id,conversation_id:null,content:`Olá, Camila! Hoje usamos ${l.current_system.toLowerCase()}. Nosso maior desafio é ${l.pain.toLowerCase()}.`,direction:'inbound',status:'simulated',created_at:at(-1)},
  ...(l.id===demoLeads[0]?.id?[
- {id:`${l.id}-3`,lead_id:l.id,conversation_id:null,content:'Entendi, Marcos! O FindFlow conecta produção, estoque e vendas em um só lugar. Podemos conversar sobre a realidade da Brisa?',direction:'outbound',status:'simulated',created_at:at(-0.58)},
+ {id:`${l.id}-3`,lead_id:l.id,conversation_id:null,content:'Entendi, Marcos! O IAX SAC conecta produção, estoque e vendas em um só lugar. Podemos conversar sobre a realidade da Brisa?',direction:'outbound',status:'simulated',created_at:at(-0.58)},
  {id:`${l.id}-4`,lead_id:l.id,conversation_id:null,content:'Podemos sim! Vocês conseguem controlar as fórmulas e os lotes também?',direction:'inbound',status:'simulated',created_at:at(-0.2)}]:[])
 ]);
 export const demoNotes: Note[] = [{id:'note-1',lead_id:demoLeads[0]?.id??'',content:'Fábrica em expansão. Marcos é o sócio e decisor. Prioriza controle de lotes e fórmulas.',author_id:'demo-1',created_at:at(-24)}];

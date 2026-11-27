@@ -15,7 +15,7 @@ const tabs = [
 ] as const;
 const channels = ['Todos', 'WhatsApp', 'Instagram'] as const;
 const templateTexts = [
-  'Olá! Sou do FindFlow. Podemos conversar sobre a gestão da sua fábrica?',
+  'Olá! Sou da IAX. Podemos conversar sobre a gestão da sua fábrica?',
   'Podemos agendar um diagnóstico para entender seus processos?',
   'Olá! Gostaria de saber se conseguiu avaliar nossa proposta.',
 ];
@@ -184,7 +184,7 @@ export function InboxPage({ selectedId }: { selectedId?: string }) {
                     <div className={`chat-message ${out ? 'outbound' : ''}`} key={m.id}>
                       <div className="message-bubble">
                         <div className="message-head">
-                          <span className="message-sender">{out ? 'Camila · FindFlow' : lead.decision_maker.split(' ')[0] || 'Contato'}</span>
+                          <span className="message-sender">{out ? 'Camila · IAX' : lead.decision_maker.split(' ')[0] || 'Contato'}</span>
                           <span className="message-time">
                             {timeLabel(m.created_at)}
                             {out && <CheckCheck size={14} className="read-check" />}

@@ -5,7 +5,7 @@ import { ActivityForm } from "@/features/sales/forms";
 import { meta } from "@/features/sales/model";
 
 export const Route = createFileRoute("/agenda")({
-  head: () => meta("Agenda", "Agenda comercial do FindFlow Sales."),
+  head: () => meta("Agenda", "Agenda comercial do IAX SAC."),
   component: AgendaRoute,
 });
 

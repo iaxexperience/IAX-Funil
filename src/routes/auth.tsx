@@ -6,7 +6,7 @@ import { meta } from "@/features/sales/model";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/auth")({
-  head: () => meta("Entrar", "Acesso à central comercial FindFlow Sales."),
+  head: () => meta("Entrar", "Acesso à central comercial IAX SAC."),
   component: AuthRoute,
 });
 
