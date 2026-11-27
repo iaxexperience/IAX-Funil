@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import {
   ArrowRight,
   Play,
@@ -13,16 +13,16 @@ import {
   Mail,
   Phone,
   MessageCircle,
-  Star,
   Clock,
   Sparkles,
 } from 'lucide-react';
 
 /* ------------------------------------------------------------------ Mídias
-   Para trocar o fundo do topo pela imagem ou vídeo do iax.info, coloque o arquivo em
-   public/media/ e preencha UM dos caminhos abaixo (ex.: '/media/hero.mp4'). */
-const HERO_VIDEO = '';
-const HERO_IMAGE = '';
+   Vídeo do topo: o mesmo do iax.info (Pexels 6153734, licença Pexels: uso comercial liberado,
+   sem atribuição). Versão HD no computador e uma menor no celular. */
+const HERO_VIDEO_HD = 'https://videos.pexels.com/video-files/6153734/6153734-hd_2048_1080_25fps.mp4';
+const HERO_VIDEO_SD = 'https://videos.pexels.com/video-files/6153734/6153734-hd_1366_720_25fps.mp4';
+const HERO_POSTER = 'https://images.pexels.com/videos/6153734/amputee-anonymouse-artificial-biotechnology-6153734.jpeg?auto=compress&cs=tinysrgb&w=1600';
 
 export const IAX_EMAIL = 'comercial@iax.info';
 export const IAX_PHONE = '+55 83 99658-3281';
@@ -104,36 +104,42 @@ const products: Product[] = [
 
 /* --------------------------------------------------------------------- Hero */
 export function IaxHero() {
+  // O vídeo só é escolhido no navegador: versão menor em telas pequenas e nada para quem prefere menos movimento.
+  const [video, setVideo] = useState('');
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setVideo(window.innerWidth < 900 ? HERO_VIDEO_SD : HERO_VIDEO_HD);
+  }, []);
   return (
     <section className="ix-hero">
-      {HERO_VIDEO ? (
-        <video className="ix-hero-media" src={HERO_VIDEO} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" />
-      ) : HERO_IMAGE ? (
-        <img className="ix-hero-media" src={HERO_IMAGE} alt="" aria-hidden="true" />
-      ) : (
-        <div className="ix-hero-art" aria-hidden="true">
-          <i className="o1" />
-          <i className="o2" />
-          <i className="o3" />
-        </div>
-      )}
+      <video
+        className="ix-hero-media"
+        src={video || undefined}
+        poster={HERO_POSTER}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+      />
       <div className="ix-hero-inner">
         <h1>Automações inteligentes, levamos sua empresa para o futuro.</h1>
-        <img className="ix-hero-logo" src="/img/iax-logo-3d-dark.png" alt="IAX" width={415} height={212} />
+        <span className="ix-hero-mark" role="img" aria-label="IAX" />
         <p className="ix-hero-tagline">Inteligência Artificial Experience</p>
         <p className="ix-hero-sub">Integre APIs, CRMs e redes sociais com tecnologia de ponta</p>
         <div className="ix-stars" aria-label="Avaliação 5 estrelas">
-          {Array.from({ length: 5 }, (_, i) => (
-            <Star key={i} size={18} fill="currentColor" />
-          ))}
+          <span className="ix-stars-row" aria-hidden="true">
+            ★★★★★
+          </span>
           <span>Avaliação 5 estrelas</span>
         </div>
         <div className="ix-hero-ctas">
-          <a href="#sistemas" className="lp-btn primary">
-            Conheça nossos sistemas <ArrowRight size={18} />
+          <a href="#sistemas" className="ix-hero-btn primary">
+            Conheça nossos sistemas <ArrowRight size={17} />
           </a>
-          <a href={waLink('Olá! Quero falar com a IAX sobre automação e sistemas.')} className="lp-btn ghost-light" target="_blank" rel="noopener noreferrer">
-            <MessageCircle size={17} /> Fale com a IAX
+          <a href={waLink('Olá! Quero falar com a IAX sobre automação e sistemas.')} className="ix-hero-btn" target="_blank" rel="noopener noreferrer">
+            <MessageCircle size={16} /> Fale com a IAX
           </a>
         </div>
       </div>
