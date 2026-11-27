@@ -42,8 +42,8 @@ const TITLES: Record<Mode, string> = {
 
 /** Consulta se o login com Google está ativado no backend, para só mostrar o botão quando funcionar. */
 async function googleEnabled(): Promise<boolean> {
-  const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-  const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
+  const url = import.meta.env["VITE_SUPABASE_URL"] as string | undefined;
+  const key = import.meta.env["VITE_SUPABASE_PUBLISHABLE_KEY"] as string | undefined;
   if (!url || !key) return false;
   try {
     const res = await fetch(`${url.replace(/\/+$/, "")}/auth/v1/settings`, { headers: { apikey: key } });
