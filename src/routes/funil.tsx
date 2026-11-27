@@ -1,20 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { Shell } from "@/features/sales/shared";
-import { LeadForm } from "@/features/sales/forms";
+import { KanbanPage } from "@/features/sales/kanban";
 import { meta } from "@/features/sales/model";
 
 export const Route = createFileRoute("/funil")({
-  head: () => meta("Funil", "Pipeline comercial do IAX SAC."),
-  component: FunilRoute,
+  head: () => meta("Funil", "Funil de vendas em Kanban do IAX SAC."),
+  component: KanbanPage,
 });
-
-function FunilRoute() {
-  const [newLead, setNewLead] = useState(false);
-  return (
-    <Shell area="Funil" onNew={() => setNewLead(true)}>
-      <div className="empty">O quadro do Funil será concluído quando houver créditos disponíveis.</div>
-      {newLead && <LeadForm open onClose={() => setNewLead(false)} />}
-    </Shell>
-  );
-}

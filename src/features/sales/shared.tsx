@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router';
-import { MessagesSquare, Columns3, CalendarDays, ShieldCheck, LogOut, LogIn, Plus, MessageCircle, Instagram, Bell, CircleHelp } from 'lucide-react';
+import { MessagesSquare, Columns3, CalendarDays, Users, Plug, ShieldCheck, LogOut, LogIn, Plus, MessageCircle, Instagram, Bell, CircleHelp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useSales } from './data';
 import { supabase } from '@/integrations/supabase/client';
@@ -49,7 +49,15 @@ export function Icp({ criteria }: { criteria: unknown }) {
   );
 }
 
-type Area = 'Inbox' | 'Funil' | 'Agenda';
+type Area = 'Inbox' | 'CRM' | 'Funil' | 'Agenda' | 'Integrações';
+
+const subtitles: Record<Area, string> = {
+  Inbox: '',
+  CRM: '',
+  Funil: 'Arraste cada oportunidade para a etapa certa.',
+  Agenda: 'Seu próximo passo começa aqui.',
+  Integrações: 'Conecte os canais onde seus clientes já estão.',
+};
 
 export function Shell({ area, children, onNew }: { area: Area; children: ReactNode; onNew: () => void }) {
   const { user, demo, leads, profiles, admin } = useSales();
@@ -57,7 +65,6 @@ export function Shell({ area, children, onNew }: { area: Area; children: ReactNo
   const name = profile?.name ?? 'Camila Andrade';
   const unread = leads.reduce((sum, l) => sum + l.unread, 0);
   const pending = leads.filter((l) => l.next_at && new Date(l.next_at).getTime() < Date.now()).length;
-  const subtitle = area === 'Funil' ? 'Cada oportunidade, no lugar certo.' : 'Seu próximo passo começa aqui.';
 
   return (
     <div className="app-shell">
@@ -71,6 +78,10 @@ export function Shell({ area, children, onNew }: { area: Area; children: ReactNo
             <span className="top-text">Conversas</span>
             {unread > 0 && <span className="top-badge">{unread}</span>}
           </Link>
+          <Link to="/crm" className={`top-link ${area === 'CRM' ? 'active' : ''}`} title="CRM de leads">
+            <Users size={19} />
+            <span className="top-text">CRM</span>
+          </Link>
           <Link to="/funil" className={`top-link ${area === 'Funil' ? 'active' : ''}`} title="Funil de vendas">
             <Columns3 size={19} />
             <span className="top-text">Funil</span>
@@ -78,6 +89,10 @@ export function Shell({ area, children, onNew }: { area: Area; children: ReactNo
           <Link to="/agenda" className={`top-link ${area === 'Agenda' ? 'active' : ''}`} title="Agenda">
             <CalendarDays size={19} />
             <span className="top-text">Agenda</span>
+          </Link>
+          <Link to="/integracoes" className={`top-link ${area === 'Integrações' ? 'active' : ''}`} title="Integrações">
+            <Plug size={19} />
+            <span className="top-text">Integrações</span>
           </Link>
         </nav>
         <div className="topbar-right">
@@ -113,11 +128,11 @@ export function Shell({ area, children, onNew }: { area: Area; children: ReactNo
         </div>
       </header>
       <main className="workspace">
-        {area !== 'Inbox' && (
+        {subtitles[area] && (
           <div className="page-header">
             <div>
               <h1>{area}</h1>
-              <p>{subtitle}</p>
+              <p>{subtitles[area]}</p>
             </div>
             <span className="page-date">{new Date().toLocaleDateString('pt-BR', { day: 'numeric', month: 'long' })}</span>
           </div>
