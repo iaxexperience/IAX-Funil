@@ -16,6 +16,10 @@ import {
   Clock,
   Plug,
   SlidersHorizontal,
+  Factory,
+  HeartPulse,
+  Store,
+  Vote,
 } from 'lucide-react';
 import { products, waLink, IAX_EMAIL, IAX_PHONE, type Product } from './products';
 import { ContactFabs } from './sections';
@@ -65,10 +69,10 @@ function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   const links = [
+    ['#para-quem', 'Para quem'],
     ['#sistemas', 'Sistemas'],
     ['#solucoes', 'Soluções'],
     ['#ia', 'Inteligência artificial'],
-    ['#por-que', 'Por que a IAX'],
     ['#contato', 'Contato'],
   ];
   return (
@@ -128,7 +132,7 @@ function Hero() {
       <div className="sk-wrap sk-hero-inner">
         <span className="sk-eyebrow">IAX · Inteligência Artificial Experience</span>
         <h1>Automações inteligentes que levam sua empresa para o futuro</h1>
-        <p>Sistemas, agentes de IA e integrações que funcionam 24 horas por dia para sua equipe vender mais, atender melhor e trabalhar menos.</p>
+        <p>Sistemas próprios e automação com IA para indústrias, hospitais, clínicas, varejo e campanhas que querem sair das planilhas, ganhar controle e atender 24 horas pelo WhatsApp.</p>
         <div className="sk-hero-ctas">
           <Cta href="#sistemas">Quero conhecer</Cta>
           <Cta href={waLink('Olá! Quero falar com um especialista da IAX.')} variant="outline" external>
@@ -175,6 +179,81 @@ function Efficiency() {
               </button>
             ))}
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------ Para quem (perfil de cliente ideal) */
+const segments = [
+  {
+    icon: Factory,
+    title: 'Indústria química e saneantes',
+    who: 'Fábricas de 10 a 100 funcionários que fabricam e vendem direto, com volume alto de notas.',
+    pains: ['Fórmulas, lotes e estoque em planilhas', 'Notas fiscais e a reforma tributária (IBS/CBS)', 'Pedidos e atendimento espalhados no WhatsApp'],
+    systems: ['FindFlow', 'IAX Guardian'],
+    msg: 'Olá! Tenho uma indústria e quero conhecer o FindFlow.',
+  },
+  {
+    icon: HeartPulse,
+    title: 'Hospitais filantrópicos e clínicas',
+    who: 'Instituições de saúde que dependem de doações e precisam de prontuário eletrônico seguro.',
+    pains: ['Prontuário em papel ou sistema antigo', 'Captação de doações por telefone sem controle', 'Recibos, metas da equipe e dados sensíveis'],
+    systems: ['Pulse PEP Clinic', 'Pulse Doações', 'IAX Guardian'],
+    msg: 'Olá! Represento uma instituição de saúde e quero conhecer o Pulse PEP Clinic e o Pulse Doações.',
+  },
+  {
+    icon: Store,
+    title: 'Varejo e empresas com caixa',
+    who: 'Lojas, redes e serviços que usam ERP e PDV e vendem pelo WhatsApp e Instagram.',
+    pains: ['Descontos, cancelamentos e quebras de caixa', 'Acessos fora do horário sem alerta', 'Clientes sem resposta fora do expediente'],
+    systems: ['IAX Guardian', 'Atendimento e CRM', 'Assistente Leo'],
+    msg: 'Olá! Tenho uma empresa com caixa e ERP e quero conhecer o IAX Guardian.',
+  },
+  {
+    icon: Vote,
+    title: 'Campanhas e mandatos',
+    who: 'Candidatos, partidos e equipes de mandato que decidem com dados de território.',
+    pains: ['Base de apoiadores desorganizada', 'Decisões sem mapa do território', 'Comunicação com a base pelo WhatsApp'],
+    systems: ['Pulse Eleitoral'],
+    msg: 'Olá! Quero conhecer o Pulse Eleitoral para minha campanha ou mandato.',
+  },
+];
+
+function Segments() {
+  return (
+    <section className="sk-light sk-seg" id="para-quem">
+      <div className="sk-wrap">
+        <span className="sk-kicker">Para quem a IAX trabalha</span>
+        <h2>Feito para organizações que querem sair das planilhas</h2>
+        <p className="sk-lead wide">
+          Empresas e instituições de médio porte, principalmente no Nordeste, que ainda dependem de planilhas ou sistemas antigos, atendem pelo WhatsApp e
+          precisam de controle e segurança para crescer.
+        </p>
+        <div className="sk-seg-grid">
+          {segments.map((g) => (
+            <article className="sk-seg-card" key={g.title}>
+              <span className="sk-seg-icon">
+                <g.icon size={22} />
+              </span>
+              <h3>{g.title}</h3>
+              <p className="sk-seg-who">{g.who}</p>
+              <ul>
+                {g.pains.map((pn) => (
+                  <li key={pn}>{pn}</li>
+                ))}
+              </ul>
+              <div className="sk-seg-sys">
+                {g.systems.map((sy) => (
+                  <span key={sy}>{sy}</span>
+                ))}
+              </div>
+              <a className="sk-link" href={waLink(g.msg)} target="_blank" rel="noopener noreferrer">
+                Falar sobre meu segmento <ArrowRight size={15} />
+              </a>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -430,6 +509,7 @@ function Contact() {
       'Olá! Vim pelo site da IAX.',
       `Nome: ${v('nome')}`,
       `Empresa: ${v('empresa')}`,
+      v('segmento') && `Segmento: ${v('segmento')}`,
       `E-mail: ${v('email')}`,
       `Telefone: ${v('telefone')}`,
       v('interesse') && `Interesse: ${v('interesse')}`,
@@ -464,6 +544,16 @@ function Contact() {
                 <input name="empresa" required placeholder="Nome da empresa" autoComplete="organization" />
               </label>
             </div>
+            <label>
+              Segmento
+              <select name="segmento" defaultValue="">
+                <option value="">Selecione o seu segmento</option>
+                {segments.map((g) => (
+                  <option key={g.title}>{g.title}</option>
+                ))}
+                <option>Outro segmento</option>
+              </select>
+            </label>
             <label>
               Sistema de interesse
               <select name="interesse" defaultValue="">
@@ -545,6 +635,7 @@ export function LandingPage() {
       <main>
         <Hero />
         <Efficiency />
+        <Segments />
         <Solutions />
         <Numbers />
         <AiSection />
