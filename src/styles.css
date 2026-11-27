@@ -1504,3 +1504,6 @@ html:has(.lp) { scroll-behavior:smooth; scroll-padding-top:80px; }
   .sx-more { display:none; }
 }
 @media(prefers-reduced-motion:reduce) { .sx-track { transition:none; } }
+
+/* Logo completa (PNG) no topo */
+.ix-hero-logo-full { display:block; width:min(620px, 88vw); height:auto; margin:-4px 0 6px; }

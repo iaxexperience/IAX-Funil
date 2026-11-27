@@ -140,10 +140,7 @@ export function IaxHero() {
       />
       <div className="ix-hero-inner">
         <h1>Automações inteligentes, levamos sua empresa para o futuro.</h1>
-        <img className="ix-hero-logo3d" src="/img/iax-logo-hero.png" alt="IAX" width={1066} height={532} fetchPriority="high" />
-        <p className="ix-hero-tagline">
-          Inteligência Artificial <span>Experience</span>
-        </p>
+        <img className="ix-hero-logo-full" src="/img/iax-logo-completa-hero.png" alt="IAX · Inteligência Artificial Experience" width={1102} height={672} fetchPriority="high" />
         <p className="ix-hero-sub">Integre APIs, CRMs e redes sociais com tecnologia de ponta</p>
         <div className="ix-stars" aria-label="Avaliação 5 estrelas">
           <span className="ix-stars-row" aria-hidden="true">
