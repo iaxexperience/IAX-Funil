@@ -9,8 +9,7 @@ import type { ReactNode } from 'react';
 export function Brand({ light = false }: { light?: boolean }) {
   return (
     <div className={`brand ${light ? 'light' : ''}`}>
-      <span className="brand-logo" role="img" aria-label="IAX" />
-      <span className="brand-sac">SAC</span>
+      <img className="brand-img" src="/img/iax-sac-logo.png" alt="IAX SAC" width={609} height={160} decoding="async" />
     </div>
   );
 }
