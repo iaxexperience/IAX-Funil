@@ -1,4 +1,5 @@
 # FindFlow Sales
+- [x] Cancelar a alteração do nome do suporte para Leo.
 - [ ] Identidade visual e Inbox com demonstração realista.
 - [ ] Funil arrastável, cadastro e painel de lead.
 - [ ] Agenda, atividades e histórico automático.
