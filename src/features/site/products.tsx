@@ -1,6 +1,8 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import {
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
   Play,
   ShieldCheck,
   Factory,
@@ -212,6 +214,102 @@ export function AboutSection() {
 }
 
 /* ----------------------------------------------------------------- Sistemas */
+/* ----------------------------------------------- Vitrine em carrossel (estilo Softcom) */
+export function SystemsShowcase() {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const reduced = useRef(false);
+  const total = products.length;
+  const go = useCallback((i: number) => setIndex(((i % total) + total) % total), [total]);
+
+  useEffect(() => {
+    reduced.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }, []);
+  useEffect(() => {
+    if (paused || reduced.current) return;
+    const t = window.setTimeout(() => go(index + 1), 5000);
+    return () => window.clearTimeout(t);
+  }, [index, paused, go]);
+
+  const current = products[index]!;
+  return (
+    <section className="sx" aria-labelledby="sx-title">
+      <div className="lp-container sx-grid">
+        <div className="sx-copy">
+          <h2 id="sx-title">Os sistemas da sua empresa estão aqui!</h2>
+          <p>
+            Segurança, ERP, doações, saúde e eleições: sistemas completos criados pela IAX, com automação e inteligência artificial. Simplifique a gestão da
+            sua empresa com a IAX!
+          </p>
+          <a className="sx-cta" href={waLink('Olá! Quero conversar sobre os sistemas da IAX.')} target="_blank" rel="noopener noreferrer">
+            Clique aqui e vamos conversar!
+            <ArrowRight size={20} />
+          </a>
+        </div>
+
+        <div
+          className="sx-card"
+          role="region"
+          aria-roledescription="carrossel"
+          aria-label="Sistemas da IAX"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocus={() => setPaused(true)}
+          onBlur={() => setPaused(false)}
+        >
+          <div className="sx-viewport">
+            <div className="sx-track" style={{ transform: `translateX(-${index * 100}%)` }}>
+              {products.map((p, i) => (
+                <a
+                  key={p.slug}
+                  href={`#${p.slug}`}
+                  className="sx-slide"
+                  style={{ ['--h' as string]: String(p.hue) }}
+                  aria-roledescription="slide"
+                  aria-label={`${i + 1} de ${total}: ${p.name}`}
+                  aria-hidden={i !== index}
+                  tabIndex={i === index ? 0 : -1}
+                >
+                  <img src={p.image} alt={`Tela do ${p.name}`} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+                </a>
+              ))}
+            </div>
+            <button type="button" className="sx-arrow prev" onClick={() => go(index - 1)} aria-label="Sistema anterior">
+              <ChevronLeft size={22} />
+            </button>
+            <button type="button" className="sx-arrow next" onClick={() => go(index + 1)} aria-label="Próximo sistema">
+              <ChevronRight size={22} />
+            </button>
+          </div>
+          <div className="sx-caption" style={{ ['--h' as string]: String(current.hue) }} aria-live="polite">
+            <span className="sx-icon">{current.icon}</span>
+            <div>
+              <b>{current.name}</b>
+              <small>{current.tag}</small>
+            </div>
+            <a href={`#${current.slug}`} className="sx-more">
+              Ver detalhes <ArrowRight size={15} />
+            </a>
+          </div>
+          <div className="sx-dots" role="tablist" aria-label="Escolher sistema">
+            {products.map((p, i) => (
+              <button
+                key={p.slug}
+                type="button"
+                role="tab"
+                aria-selected={i === index}
+                aria-label={p.name}
+                className={i === index ? 'on' : ''}
+                onClick={() => go(i)}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ProductVideo({ p }: { p: Product }) {
   const [playing, setPlaying] = useState(false);
   if (p.video) {

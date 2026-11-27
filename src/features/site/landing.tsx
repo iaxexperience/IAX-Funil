@@ -20,7 +20,7 @@ import {
   ClipboardList,
 } from 'lucide-react';
 import { Brand } from '@/features/sales/shared';
-import { IaxHero, AboutSection, ProductsSection, ContactSection, IAX_EMAIL, IAX_PHONE } from './products';
+import { IaxHero, SystemsShowcase, AboutSection, ProductsSection, ContactSection, IAX_EMAIL, IAX_PHONE } from './products';
 import { ChatbotSection, CrmSection, LeadsSection, FeatureCardsSection, FunnelSection, AgendaSection, IntegrationsSection, ContactFabs } from './sections';
 
 // Vídeos gratuitos do Mixkit (Mixkit Stock Video Free License: uso comercial liberado, sem atribuição).
@@ -81,6 +81,8 @@ export function LandingPage() {
 
       <main id="topo">
         <IaxHero />
+
+        <SystemsShowcase />
 
         <AboutSection />
 

@@ -1468,3 +1468,39 @@ html:has(.lp) { scroll-behavior:smooth; scroll-padding-top:80px; }
 .ix-product:hover .ix-video.shot img { transform:scale(1.03); }
 .ix-soon-badge { position:absolute; right:14px; bottom:14px; display:inline-flex; align-items:center; gap:6px; font-family:var(--font-display); font-size:12px; font-weight:700; color:oklch(1 0 0); background:oklch(0.15 0.04 260 / 0.72); backdrop-filter:blur(6px); border:1px solid oklch(1 0 0 / 0.2); border-radius:999px; padding:6px 12px; }
 .ix-product .ix-product-headline { font-family:var(--font-display); font-size:19px !important; font-weight:700; line-height:1.4 !important; color:oklch(0.45 0.17 var(--h)) !important; margin:-4px 0 12px !important; }
+
+/* ===== Vitrine dos sistemas em carrossel (estilo Softcom: fundo grafite, Montserrat + Raleway) ===== */
+.sx { background:oklch(0.235 0.014 265); color:oklch(1 0 0); padding:72px 0; }
+.sx-grid { display:grid; grid-template-columns:0.85fr 1.15fr; gap:64px; align-items:center; }
+.sx-copy h2 { font-family:'Montserrat', var(--font-display); font-weight:600; font-size:clamp(34px, 3.6vw, 50px); line-height:1.12; letter-spacing:-0.01em; margin:0 0 24px; }
+.sx-copy p { font-family:'Raleway', var(--font-body); font-weight:400; font-size:clamp(17px, 1.35vw, 21px); line-height:1.4; color:oklch(0.93 0.005 265); margin:0 0 36px; max-width:470px; }
+.sx-cta { display:flex; align-items:center; justify-content:center; gap:40px; width:min(100%, 452px); height:60px; padding:0 24px; border-radius:6px; font-family:'Montserrat', var(--font-display); font-weight:600; font-size:19px; color:oklch(1 0 0); background:oklch(0.6 0.19 258); box-shadow:0 10px 26px oklch(0.55 0.2 260 / 0.35); transition:background .15s, transform .15s; }
+.sx-cta:hover { background:oklch(0.55 0.2 260); transform:translateY(-1px); }
+.sx-card { background:oklch(1 0 0); border-radius:22px; padding:22px 22px 16px; box-shadow:0 30px 70px oklch(0.05 0.02 265 / 0.45); color:var(--lp-ink); }
+.sx-viewport { position:relative; overflow:hidden; border-radius:16px; background:oklch(0.12 0.02 265); }
+.sx-track { display:flex; transition:transform .6s cubic-bezier(.65, 0, .35, 1); }
+.sx-slide { flex:0 0 100%; aspect-ratio:16 / 9; display:grid; place-items:center; background:radial-gradient(circle at 70% 30%, oklch(0.32 0.1 var(--h) / 0.7), transparent 60%), oklch(0.13 0.03 var(--h)); }
+.sx-slide img { width:100%; height:100%; object-fit:contain; display:block; }
+.sx-arrow { position:absolute; top:50%; transform:translateY(-50%); display:grid; place-items:center; width:40px; height:40px; border-radius:50%; border:0; cursor:pointer; color:oklch(0.25 0.02 265); background:oklch(1 0 0 / 0.88); box-shadow:0 6px 18px oklch(0.1 0.02 265 / 0.35); opacity:0; transition:opacity .2s, background .15s; }
+.sx-arrow.prev { left:12px; } .sx-arrow.next { right:12px; }
+.sx-viewport:hover .sx-arrow, .sx-arrow:focus-visible { opacity:1; }
+.sx-arrow:hover { background:oklch(1 0 0); }
+.sx-caption { display:flex; align-items:center; gap:12px; padding:16px 4px 6px; }
+.sx-icon { display:grid; place-items:center; width:44px; height:44px; flex-shrink:0; border-radius:12px; color:oklch(1 0 0); background:linear-gradient(135deg, oklch(0.62 0.17 var(--h)), oklch(0.45 0.18 var(--h))); }
+.sx-icon svg { width:22px; height:22px; }
+.sx-caption b { display:block; font-family:'Montserrat', var(--font-display); font-size:18px; font-weight:700; }
+.sx-caption small { font-family:'Raleway', var(--font-body); font-size:13.5px; color:oklch(0.5 0.03 262); }
+.sx-more { margin-left:auto; display:inline-flex; align-items:center; gap:4px; font-family:'Montserrat', var(--font-display); font-size:13.5px; font-weight:700; color:oklch(0.5 0.18 var(--h)); white-space:nowrap; }
+.sx-more:hover { text-decoration:underline; }
+.sx-dots { display:flex; justify-content:center; gap:8px; padding-top:8px; }
+.sx-dots button { width:9px; height:9px; padding:0; border:0; border-radius:999px; background:oklch(0.86 0.01 262); cursor:pointer; transition:width .25s, background .25s; }
+.sx-dots button.on { width:28px; background:oklch(0.6 0.19 258); }
+@media(max-width:980px) { .sx-grid { grid-template-columns:1fr; gap:40px; } .sx-copy p { max-width:none; } }
+@media(max-width:760px) {
+  .sx { padding:52px 0; }
+  .sx-cta { gap:16px; font-size:17px; height:56px; }
+  .sx-card { padding:12px 12px 10px; border-radius:18px; }
+  .sx-arrow { opacity:1; width:34px; height:34px; }
+  .sx-more { display:none; }
+}
+@media(prefers-reduced-motion:reduce) { .sx-track { transition:none; } }
