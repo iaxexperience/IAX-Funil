@@ -167,6 +167,7 @@ export function LandingPage() {
             <Brand />
           </a>
           <nav className={`lp-links ${menu ? 'open' : ''}`} aria-label="Seções">
+            <a href="#leo" onClick={() => setMenu(false)}>Assistente Leo</a>
             <a href="#recursos" onClick={() => setMenu(false)}>Recursos</a>
             <a href="#ia" onClick={() => setMenu(false)}>Inteligência artificial</a>
             <a href="#funil" onClick={() => setMenu(false)}>Funil de vendas</a>
@@ -474,8 +475,16 @@ export function LandingPage() {
             <Link to="/" search={{}}>Demonstração</Link>
           </div>
         </div>
-        <div className="lp-container lp-copy" style={{ paddingRight: 96 }}>© {new Date().getFullYear()} IAX SAC. Todos os direitos reservados.</div>
+        <div className="lp-container lp-copy">© {new Date().getFullYear()} IAX SAC. Todos os direitos reservados.</div>
       </footer>
+
+      <a href="#leo" className="lp-leo-fab" aria-label="Falar com o Leo, assistente virtual">
+        <span className="lp-leo-fab-tip">
+          Olá! Sou o <b>Leo</b>. Posso ajudar?
+        </span>
+        <span className="lp-leo-fab-face" aria-hidden="true" />
+        <span className="lp-leo-fab-dot" aria-hidden="true" />
+      </a>
     </div>
   );
 }
