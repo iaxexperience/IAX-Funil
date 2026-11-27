@@ -9,7 +9,8 @@ import type { ReactNode } from 'react';
 export function Brand({ light = false }: { light?: boolean }) {
   return (
     <div className={`brand ${light ? 'light' : ''}`}>
-      <img className="brand-img" src="/img/iax-sac-logo.png" alt="IAX SAC" width={609} height={160} decoding="async" />
+      {/* PNG 3D com fundo transparente; a versão "dark" tem contorno luminoso para fundos azuis. */}
+      <img className="brand-img" src={light ? '/img/iax-sac-logo-dark.png' : '/img/iax-sac-logo.png'} alt="IAX SAC" width={662} height={212} decoding="async" />
     </div>
   );
 }

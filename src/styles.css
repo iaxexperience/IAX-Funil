@@ -196,10 +196,11 @@ button, a, input, select, textarea { -webkit-tap-highlight-color:transparent; }
 .brand { display:inline-flex; align-items:center; gap:8px; }
 .brand-logo { display:block; height:34px; aspect-ratio:363 / 160; background:url('/img/iax-logo-mark.png') no-repeat center / contain; }
 .brand-sac { font-family:var(--font-display); font-weight:800; font-size:12px; letter-spacing:.14em; line-height:1; color:oklch(1 0 0); padding:5px 8px 5px 9px; border-radius:6px; background:linear-gradient(135deg, oklch(0.66 0.18 240), oklch(0.45 0.2 264)); }
-.brand.light { background:oklch(1 0 0); padding:5px 8px 5px 10px; border-radius:10px; box-shadow:0 2px 8px oklch(0.15 0.08 264 / 0.2); }
+.brand.light { background:none; padding:0; border-radius:0; box-shadow:none; }
 .brand.light .brand-logo { height:24px; }
-.brand-img { display:block; height:34px; width:auto; }
-.brand.light .brand-img { height:26px; }
+/* O PNG tem margem transparente para a sombra 3D (o desenho ocupa ~75% da altura). */
+.brand-img { display:block; height:45px; width:auto; margin:-5px -6px -5px -8px; }
+.brand.light .brand-img { height:56px; margin:-10px -6px -10px -2px; }
 .brand.light .brand-sac { font-size:10px; padding:4px 6px 4px 7px; }
 .topbar-nav { display:flex; align-items:center; gap:4px; flex:1; justify-content:center; }
 .top-link { position:relative; display:flex; align-items:center; gap:8px; height:40px; padding:0 14px; border-radius:8px; color:oklch(1 0 0 / 0.82); font-size:13px; font-weight:550; transition:background .15s,color .15s; }
@@ -618,7 +619,7 @@ html:has(.lp) { scroll-behavior:smooth; scroll-padding-top:80px; }
 /* Nav */
 .lp-links { gap:24px; }
 .lp-nav .brand-logo { height:36px; }
-.lp-nav .brand-img { height:38px; }
+.lp-nav .brand-img { height:50px; }
 /* Hero escuro com vídeo de fundo */
 .lp-hero { position:relative; isolation:isolate; overflow:hidden; background:var(--lp-navy); color:oklch(1 0 0); padding:88px 0 104px; }
 .lp-hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.3; z-index:-2; filter:saturate(.7); }
@@ -680,7 +681,7 @@ html:has(.lp) { scroll-behavior:smooth; scroll-padding-top:80px; }
 @media(max-width:760px) {
   .lp-hero { padding:48px 0 72px; }
   .lp-links { top:64px; padding:8px 16px 16px; }
-  .lp-nav .brand-logo { height:30px; } .lp-nav .brand-img { height:32px; }
+  .lp-nav .brand-logo { height:30px; } .lp-nav .brand-img { height:42px; }
   .lp-leo-badge { left:8px; bottom:16px; }
   .lp-leo-pills { grid-template-columns:1fr; }
   .lp-leo-pills li { font-size:14px; }
@@ -1048,7 +1049,7 @@ html:has(.lp) { scroll-behavior:smooth; scroll-padding-top:80px; }
 .au-form-side { display:flex; flex-direction:column; align-items:stretch; padding:48px 64px 40px; }
 .au-brand { align-self:center; margin-bottom:34px; }
 .au-brand .brand-logo { height:44px; }
-.au-brand .brand-img { height:46px; }
+.au-brand .brand-img { height:62px; }
 .au-brand .brand-sac { font-size:14px; padding:6px 9px 6px 10px; }
 .au-form-side h1 { font-family:var(--font-display); font-size:28px; font-weight:800; letter-spacing:-0.02em; text-align:center; margin:0 0 26px; }
 .au-sub { font-size:14px; line-height:1.6; color:oklch(0.48 0.03 262); text-align:center; margin:-14px 0 22px; }
