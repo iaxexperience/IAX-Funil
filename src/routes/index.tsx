@@ -5,8 +5,8 @@ import { meta } from "@/features/sales/model";
 export const Route = createFileRoute("/")({
   head: () =>
     meta(
-      "Atendimento e vendas pelo WhatsApp",
-      "Centralize WhatsApp e Instagram, organize o funil de vendas e nunca mais perca um lead.",
+      "Automações inteligentes",
+      "A IAX cria automações, agentes de IA e sistemas como IAX Guardian, FindFlow e Pulse para levar sua empresa para o futuro.",
     ),
   component: LandingPage,
 });
