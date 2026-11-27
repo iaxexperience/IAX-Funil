@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import { Brand } from '@/features/sales/shared';
 import { IaxHero, AboutSection, ProductsSection, ContactSection, IAX_EMAIL, IAX_PHONE } from './products';
-import { SolutionsSection, ChatbotSection, CrmSection, LeadsSection, FeatureCardsSection, FunnelSection, AgendaSection, IntegrationsSection, ContactFabs } from './sections';
+import { ChatbotSection, CrmSection, LeadsSection, FeatureCardsSection, FunnelSection, AgendaSection, IntegrationsSection, ContactFabs } from './sections';
 
 // Vídeos gratuitos do Mixkit (Mixkit Stock Video Free License: uso comercial liberado, sem atribuição).
 const VIDEO_PHONE = 'https://assets.mixkit.co/videos/43270/43270-720.mp4';
@@ -62,7 +62,7 @@ export function LandingPage() {
           <nav className={`lp-links ${menu ? 'open' : ''}`} aria-label="Seções">
             <a href="#quem-somos" onClick={() => setMenu(false)}>Quem somos</a>
             <a href="#sistemas" onClick={() => setMenu(false)}>Sistemas</a>
-            <a href="#solucoes" onClick={() => setMenu(false)}>Atendimento</a>
+            <a href="#leo" onClick={() => setMenu(false)}>Atendimento</a>
             <a href="#crm" onClick={() => setMenu(false)}>CRM</a>
             <a href="#integracoes" onClick={() => setMenu(false)}>Integrações</a>
             <a href="#contato" onClick={() => setMenu(false)}>Contato</a>
@@ -113,8 +113,6 @@ export function LandingPage() {
             </div>
           </div>
         </section>
-
-        <SolutionsSection />
 
         <section className="lp-section lp-leo" id="leo">
           <div className="lp-container lp-leo-grid">
@@ -279,7 +277,7 @@ export function LandingPage() {
           </div>
           <div>
             <h4>Plataforma</h4>
-            <a href="#solucoes">Atendimento e CRM</a>
+            <a href="#leo">Atendimento e CRM</a>
             <a href="#integracoes">Integrações</a>
             <Link to="/auth">Entrar</Link>
             <Link to="/inbox" search={{}}>Demonstração</Link>
