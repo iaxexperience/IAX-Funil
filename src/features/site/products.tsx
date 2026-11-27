@@ -38,8 +38,11 @@ type Product = {
   tag: string;
   icon: ReactNode;
   hue: number;
+  headline: string;
   text: string;
   points: string[];
+  /** Print da tela do sistema, mostrado enquanto o vídeo não chega. */
+  image: string;
   video: string;
   poster: string;
 };
@@ -48,11 +51,13 @@ const products: Product[] = [
   {
     slug: 'iax-guardian',
     name: 'IAX Guardian',
-    tag: 'Segurança',
+    tag: 'Security Operations',
     icon: <ShieldCheck size={26} />,
-    hue: 200,
-    text: 'Proteção e monitoramento para os sistemas e os dados da sua empresa, com alertas para agir antes que um problema vire prejuízo.',
-    points: ['Monitoramento contínuo', 'Alertas em tempo real', 'Dados protegidos'],
+    hue: 250,
+    headline: 'Ataque e defesa, sob a mesma lente.',
+    text: 'O IAX Guardian observa cada evento dos seus sistemas, simula o adversário e alerta sua equipe antes que o risco vire incidente.',
+    points: ['Monitoramento contínuo 24/7', 'Red × Blue: simulação e detecção', 'Zero escritas no ERP (somente leitura)'],
+    image: '/img/produtos/iax-guardian.jpg',
     video: '',
     poster: '',
   },
@@ -62,41 +67,49 @@ const products: Product[] = [
     tag: 'ERP para fábricas químicas',
     icon: <Factory size={26} />,
     hue: 255,
-    text: 'Da fórmula à nota fiscal, do balcão ao WhatsApp: produção, estoque, fiscal, vendas e atendimento num lugar só.',
+    headline: 'Da fórmula à nota fiscal, do balcão ao WhatsApp.',
+    text: 'Produção, estoque, fiscal, vendas e atendimento num lugar só, feito para a rotina de fábricas químicas.',
     points: ['Fórmulas, lotes e produção', 'NF-e, NFC-e e IBS/CBS', 'PDV, financeiro e WhatsApp'],
+    image: '/img/produtos/findflow.jpg',
     video: '',
     poster: '',
   },
   {
     slug: 'pulse-doacoes',
     name: 'Pulse Doações',
-    tag: 'Gestão de doações',
+    tag: 'Doações para hospitais e instituições filantrópicas',
     icon: <HeartHandshake size={26} />,
-    hue: 345,
-    text: 'Organize doadores, campanhas e contribuições em um só lugar e acompanhe a arrecadação da sua instituição.',
-    points: ['Cadastro de doadores', 'Campanhas de arrecadação', 'Relatórios de contribuições'],
+    hue: 195,
+    headline: 'Cada doação no ritmo certo, do telefone ao recibo.',
+    text: 'Carteira de doadores, telemarketing, caixa, coleta e relatórios em uma só plataforma, com metas para a equipe e recibos que o doador pode validar.',
+    points: ['Carteira de doadores e telemarketing', 'Caixa, coleta e relatórios', 'Metas da equipe e recibos validáveis'],
+    image: '/img/produtos/pulse-doacoes.jpg',
     video: '',
     poster: '',
   },
   {
     slug: 'pulse-pep-clinic',
     name: 'Pulse PEP Clinic',
-    tag: 'Prontuário eletrônico',
+    tag: 'Prontuário eletrônico do paciente',
     icon: <Stethoscope size={26} />,
-    hue: 170,
-    text: 'Prontuário eletrônico do paciente, agenda e atendimento da clínica integrados em um sistema seguro e fácil de usar.',
-    points: ['Prontuário eletrônico (PEP)', 'Agenda da clínica', 'Histórico do paciente'],
+    hue: 165,
+    headline: 'Tecnologia de ponta para sua gestão clínica.',
+    text: 'Sistema seguro para gestão clínica e prontuário eletrônico, desenvolvido para médicos, enfermeiros e gestores hospitalares.',
+    points: ['Prontuários, evoluções e prescrições', 'Sinais vitais e exames', 'Painel de chamada e relatórios'],
+    image: '/img/produtos/pulse-pep-clinic.jpg',
     video: '',
     poster: '',
   },
   {
     slug: 'pulse-eleitoral',
     name: 'Pulse Eleitoral',
-    tag: 'Gestão de campanhas',
+    tag: 'Gestão estratégica digital',
     icon: <Vote size={26} />,
-    hue: 290,
-    text: 'Organize apoiadores, equipes e a comunicação da campanha com informações sempre atualizadas para decidir rápido.',
-    points: ['Base de apoiadores', 'Equipes e lideranças', 'Comunicação pelo WhatsApp'],
+    hue: 160,
+    headline: 'A inteligência que faltava para a sua vitória nas urnas.',
+    text: 'Plataforma de mapeamento territorial e análise preditiva. Transforme dados complexos em decisões vitoriosas.',
+    points: ['Mapeamento territorial', 'Análise preditiva', 'Ambiente seguro e criptografado'],
+    image: '/img/produtos/pulse-eleitoral.jpg',
     video: '',
     poster: '',
   },
@@ -215,6 +228,16 @@ function ProductVideo({ p }: { p: Product }) {
       </div>
     );
   }
+  if (p.image) {
+    return (
+      <div className="ix-video shot">
+        <img src={p.image} alt={`Tela do ${p.name}`} loading="lazy" decoding="async" />
+        <span className="ix-soon-badge">
+          <Play size={13} fill="currentColor" /> Vídeo em breve
+        </span>
+      </div>
+    );
+  }
   return (
     <div className="ix-video soon" aria-label={`Vídeo do ${p.name} em breve`}>
       <div className="ix-video-glow" />
@@ -257,6 +280,7 @@ export function ProductsSection() {
                   {p.tag}
                 </span>
                 <h3>{p.name}</h3>
+                <p className="ix-product-headline">{p.headline}</p>
                 <p>{p.text}</p>
                 <ul>
                   {p.points.map((pt) => (
