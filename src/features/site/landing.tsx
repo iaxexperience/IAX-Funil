@@ -418,7 +418,7 @@ export function LandingPage() {
             <Link to="/inbox" search={{}}>Demonstração</Link>
           </div>
         </div>
-        <div className="lp-container lp-copy">© {new Date().getFullYear()} IAX SAC. Todos os direitos reservados.</div>
+        <div className="lp-container lp-copy">© {new Date().getFullYear()} IAX. Todos os direitos reservados.</div>
       </footer>
 
       <ContactFabs />

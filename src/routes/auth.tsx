@@ -6,7 +6,7 @@ import { Brand } from "@/features/sales/shared";
 import { meta } from "@/features/sales/model";
 
 export const Route = createFileRoute("/auth")({
-  head: () => meta("Entrar", "Acesso à central comercial IAX SAC."),
+  head: () => meta("Entrar", "Acesso à central comercial IAX."),
   component: AuthRoute,
 });
 
@@ -166,7 +166,7 @@ function AuthRoute() {
 
       <main className="au-card">
         <section className="au-form-side">
-          <Link to="/" className="au-brand" aria-label="IAX SAC: ir para o site">
+          <Link to="/" className="au-brand" aria-label="IAX: ir para o site">
             <Brand />
           </Link>
           <h1>{TITLES[mode]}</h1>
@@ -305,7 +305,7 @@ function AuthRoute() {
       </main>
 
       <footer className="au-footer">
-        IAX SAC © {new Date().getFullYear()} · Produzido por IAX Inteligência Artificial Experience LTDA. Todos os direitos reservados.
+        IAX © {new Date().getFullYear()} · Produzido por IAX Inteligência Artificial Experience LTDA. Todos os direitos reservados.
       </footer>
     </div>
   );

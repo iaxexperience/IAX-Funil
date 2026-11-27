@@ -84,10 +84,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "IAX SAC" },
-      { name: "description", content: "IAX SAC: atendimento e vendas pelo WhatsApp com inteligência artificial." },
+      { title: "IAX" },
+      { name: "description", content: "IAX: atendimento e vendas pelo WhatsApp com inteligência artificial." },
       { name: "author", content: "IAX" },
-      { property: "og:title", content: "IAX SAC" },
+      { property: "og:title", content: "IAX" },
       { property: "og:description", content: "Atendimento e vendas pelo WhatsApp com inteligência artificial." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

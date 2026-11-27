@@ -3,6 +3,6 @@ import { KanbanPage } from "@/features/sales/kanban";
 import { meta } from "@/features/sales/model";
 
 export const Route = createFileRoute("/funil")({
-  head: () => meta("Funil", "Funil de vendas em Kanban do IAX SAC."),
+  head: () => meta("Funil", "Funil de vendas em Kanban da IAX."),
   component: KanbanPage,
 });

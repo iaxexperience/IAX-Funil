@@ -45,10 +45,10 @@ import {
 
 export const VIDEO_OFFICE_POSTER = 'https://assets.mixkit.co/videos/42664/42664-thumb-720-0.jpg';
 
-/* Números de WhatsApp (somente dígitos, com DDI e DDD, ex.: 5583999999999).
-   Enquanto estiverem vazios, os botões levam para a seção de contato. */
-const WHATSAPP_COMERCIAL = '';
-const WHATSAPP_SUPORTE = '';
+/* Números de WhatsApp (somente dígitos, com DDI e DDD). Hoje os dois usam o comercial do iax.info.
+   Se um deles ficar vazio, o botão leva para a seção de contato. */
+const WHATSAPP_COMERCIAL = '5583996583281';
+const WHATSAPP_SUPORTE = '5583996583281';
 
 const tones = ['t0', 't1', 't2', 't3', 't4', 't5'];
 function toneOf(name: string) {
@@ -91,7 +91,6 @@ function AppWindow({ active, children, className = '' }: { active: string; child
       <div className="lp-win-bar">
         <span className="lp-win-logo">
           <span className="brand-logo" />
-          <b>SAC</b>
         </span>
         <span className="lp-win-org">Sua empresa ▾</span>
         <nav>
@@ -196,7 +195,7 @@ export function SolutionsSection() {
           <h2 className="lp-giant">
             <span className="lp-grad">Soluções</span>
           </h2>
-          <p>Transforme suas interações com as funcionalidades do IAX SAC</p>
+          <p>Transforme suas interações com as funcionalidades da IAX</p>
         </div>
         <div className="lp-sol-grid">
           {solutions.map((s) => (
@@ -246,7 +245,7 @@ export function ChatbotSection() {
                 <span className="brand-logo" />
               </span>
               <div>
-                <strong>IAX SAC</strong>
+                <strong>IAX</strong>
                 <small>
                   <i /> Online
                 </small>
@@ -635,7 +634,7 @@ export function LeadsSection() {
                         ? 'Lead demonstrou interesse no plano empresarial. Enviar proposta personalizada.'
                         : tab === 'Atividades'
                           ? 'Ligação de qualificação concluída. Próximo passo: demonstração.'
-                          : 'Negócio “Implantação IAX SAC” criado na etapa Diagnóstico.'}
+                          : 'Negócio “Implantação IAX” criado na etapa Diagnóstico.'}
                     </p>
                   </div>
                 </div>
@@ -965,11 +964,11 @@ export function AgendaSection() {
 
 /* ------------------------------------------------------------- Integrações */
 export function IntegrationsSection() {
-  const items = ['WhatsApp', 'E-mail', 'Instagram', 'IAX SAC', 'Zapier', 'API aberta', 'Webhooks', 'Formulários web'];
+  const items = ['WhatsApp', 'E-mail', 'Instagram', 'Zapier', 'API aberta', 'Webhooks', 'Formulários web'];
   return (
     <section className="lp-section lp-integr" id="integracoes">
       <div className="lp-container">
-        <Heading center eyebrow="Integrações" title="Conecte o IAX SAC à sua operação" text="Leve organização para os canais que já fazem parte da sua rotina. API aberta para criar fluxos personalizados entre sistemas." />
+        <Heading center eyebrow="Integrações" title="Conecte a IAX à sua operação" text="Leve organização para os canais que já fazem parte da sua rotina. API aberta para criar fluxos personalizados entre sistemas." />
         <div className="lp-integr-pills">
           {items.map((i) => (
             <span key={i}>{i}</span>
@@ -1000,7 +999,7 @@ export function ContactFabs() {
         <span className="lp-leo-fab-face lp-fab-leo" />
       </a>
       <a
-        href={waHref(WHATSAPP_COMERCIAL, 'Olá! Quero conhecer o IAX SAC.')}
+        href={waHref(WHATSAPP_COMERCIAL, 'Olá! Quero conhecer a IAX.')}
         className="lp-fab"
         aria-label="Falar com o comercial pelo WhatsApp"
         {...(WHATSAPP_COMERCIAL ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
@@ -1011,7 +1010,7 @@ export function ContactFabs() {
         </span>
       </a>
       <a
-        href={waHref(WHATSAPP_SUPORTE, 'Olá! Preciso de suporte no IAX SAC.')}
+        href={waHref(WHATSAPP_SUPORTE, 'Olá! Preciso de suporte da IAX.')}
         className="lp-fab"
         aria-label="Falar com o suporte pelo WhatsApp"
         {...(WHATSAPP_SUPORTE ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
