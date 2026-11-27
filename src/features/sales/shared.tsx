@@ -9,13 +9,8 @@ import type { ReactNode } from 'react';
 export function Brand({ light = false }: { light?: boolean }) {
   return (
     <div className={`brand ${light ? 'light' : ''}`}>
-      <svg className="brand-mark" viewBox="0 0 32 36" fill="none" aria-hidden="true">
-        <path d="M3 5h25v8H11v6h13v8H11v7H3V5Z" fill="currentColor" />
-        <path d="M3 1h25v3H3z" fill="currentColor" opacity=".35" />
-      </svg>
-      <div className="brand-name">
-        FindFlow<span className="brand-sub">SALES</span>
-      </div>
+      <span className="brand-logo" role="img" aria-label="IAX" />
+      <span className="brand-sac">SAC</span>
     </div>
   );
 }
