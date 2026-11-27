@@ -1711,3 +1711,22 @@ html:has(.sk) { scroll-behavior:smooth; scroll-padding-top:96px; }
   .sk-copy a { margin-right:0; }
 }
 @media(prefers-reduced-motion:reduce) { .sk-eff-frame img { transition:none; } html:has(.sk) { scroll-behavior:auto; } }
+
+/* ===== Correção: telas dos sistemas sempre inteiras (sem recorte) ===== */
+.sk-eff-grid { grid-template-columns:0.78fr 1.22fr; gap:48px; }
+.sk .sk-eff-visual { margin-right:0; }
+.sk .sk-eff-frame { aspect-ratio:2 / 1.06; border-radius:14px; border:2px solid oklch(0.6 0.18 260 / 0.7); background:oklch(0.14 0.03 262); box-shadow:0 30px 70px oklch(0.05 0.03 262 / 0.55), 0 0 0 6px oklch(0.6 0.18 260 / 0.12); }
+.sk .sk-eff-frame img { object-fit:contain; object-position:center; transform:none; }
+.sk .sk-eff-frame img.on { transform:none; }
+/* Cartões "Veja os sistemas em ação": tela inteira em cima, texto embaixo */
+.sk .sk-video { height:auto; display:flex; flex-direction:column; background:oklch(0.26 0.025 262); border:1px solid oklch(1 0 0 / 0.08); }
+.sk-video-media { position:relative; aspect-ratio:16 / 9; background:oklch(0.13 0.03 262); }
+.sk-video-media img, .sk-video-media video { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; display:block; }
+.sk-video-media video { background:#000; }
+.sk .sk-video-copy { position:static; padding:20px 22px 22px; }
+.sk .sk-video-copy strong { font-size:24px; }
+/* Prints de sistema nos cartões de IA também inteiros */
+.sk-ai-img.shot { background:oklch(0.14 0.03 262); }
+.sk-ai-img.shot img { object-fit:contain; }
+@media(max-width:980px) { .sk-eff-grid { grid-template-columns:1fr; } }
+@media(max-width:760px) { .sk .sk-video { height:auto; } }
