@@ -816,7 +816,7 @@ export function FunnelSection() {
             Visualize cada etapa, acompanhe oportunidades conforme elas acontecem e entenda exatamente onde estão as chances reais de gerar receita.
             Tudo integrado ao atendimento para você vender mais com muito menos esforço.
           </p>
-          <a href="/" className="lp-btn primary">
+          <a href="/inbox" className="lp-btn primary">
             Veja na prática <ArrowRight size={18} />
           </a>
         </div>

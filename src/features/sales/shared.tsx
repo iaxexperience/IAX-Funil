@@ -62,11 +62,11 @@ export function Shell({ area, children, onNew }: { area: Area; children: ReactNo
   return (
     <div className="app-shell">
       <header className="topbar">
-        <Link to="/" search={{}} className="topbar-brand" aria-label="Ir para a Inbox">
+        <Link to="/inbox" search={{}} className="topbar-brand" aria-label="Ir para a Inbox">
           <Brand light />
         </Link>
         <nav className="topbar-nav" aria-label="Menu principal">
-          <Link to="/" search={{}} className={`top-link ${area === 'Inbox' ? 'active' : ''}`} title="Conversas">
+          <Link to="/inbox" search={{}} className={`top-link ${area === 'Inbox' ? 'active' : ''}`} title="Conversas">
             <MessagesSquare size={19} />
             <span className="top-text">Conversas</span>
             {unread > 0 && <span className="top-badge">{unread}</span>}

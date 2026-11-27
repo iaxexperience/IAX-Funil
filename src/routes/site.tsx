@@ -1,12 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { LandingPage } from "@/features/site/landing";
-import { meta } from "@/features/sales/model";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
+// Endereço antigo da landing page: agora ela é a página inicial.
 export const Route = createFileRoute("/site")({
-  head: () =>
-    meta(
-      "Atendimento e vendas pelo WhatsApp",
-      "Centralize WhatsApp e Instagram, organize o funil de vendas e nunca mais perca um lead.",
-    ),
-  component: LandingPage,
+  beforeLoad: () => {
+    throw redirect({ to: "/", replace: true });
+  },
 });

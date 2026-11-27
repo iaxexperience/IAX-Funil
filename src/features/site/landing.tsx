@@ -193,7 +193,7 @@ export function LandingPage() {
                   Começar agora
                   <ArrowRight size={18} />
                 </Link>
-                <Link to="/" search={{}} className="lp-btn ghost-light">
+                <Link to="/inbox" search={{}} className="lp-btn ghost-light">
                   <Play size={16} />
                   Ver demonstração
                 </Link>
@@ -415,7 +415,7 @@ export function LandingPage() {
           <div>
             <h4>Acesso</h4>
             <Link to="/auth">Entrar</Link>
-            <Link to="/" search={{}}>Demonstração</Link>
+            <Link to="/inbox" search={{}}>Demonstração</Link>
           </div>
         </div>
         <div className="lp-container lp-copy">© {new Date().getFullYear()} IAX SAC. Todos os direitos reservados.</div>

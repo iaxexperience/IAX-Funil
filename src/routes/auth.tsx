@@ -46,7 +46,7 @@ function AuthRoute() {
       if (mode === "entrar") {
         const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
         if (signInError) throw signInError;
-        await navigate({ to: "/", search: {} });
+        await navigate({ to: "/inbox", search: {} });
       } else {
         const { data, error: signUpError } = await supabase.auth.signUp({
           email,
@@ -54,7 +54,7 @@ function AuthRoute() {
           options: { data: { name: name.trim() || "Comercial" } },
         });
         if (signUpError) throw signUpError;
-        if (data.session) await navigate({ to: "/", search: {} });
+        if (data.session) await navigate({ to: "/inbox", search: {} });
         else setNotice(`Enviamos um link de confirmação para ${email}. Abra o e-mail e clique no link para entrar.`);
       }
     } catch (err) {
@@ -109,7 +109,7 @@ function AuthRoute() {
         <Button variant="ghost" onClick={switchMode}>
           {mode === "entrar" ? "Não tem conta? Criar" : "Já tem conta? Entrar"}
         </Button>
-        <Link to="/" search={{}} className="auth-link">
+        <Link to="/inbox" search={{}} className="auth-link">
           Voltar para a demonstração
         </Link>
       </div>

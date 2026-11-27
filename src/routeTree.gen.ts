@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgendaRouteImport } from './routes/agenda'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as FunilRouteImport } from './routes/funil'
+import { Route as InboxRouteImport } from './routes/inbox'
 import { Route as SiteRouteImport } from './routes/site'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const FunilRoute = FunilRouteImport.update({
   path: '/funil',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InboxRoute = InboxRouteImport.update({
+  id: '/inbox',
+  path: '/inbox',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SiteRoute = SiteRouteImport.update({
   id: '/site',
   path: '/site',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/agenda': typeof AgendaRoute
   '/auth': typeof AuthRoute
   '/funil': typeof FunilRoute
+  '/inbox': typeof InboxRoute
   '/site': typeof SiteRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/agenda': typeof AgendaRoute
   '/auth': typeof AuthRoute
   '/funil': typeof FunilRoute
+  '/inbox': typeof InboxRoute
   '/site': typeof SiteRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,15 @@ export interface FileRoutesById {
   '/agenda': typeof AgendaRoute
   '/auth': typeof AuthRoute
   '/funil': typeof FunilRoute
+  '/inbox': typeof InboxRoute
   '/site': typeof SiteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/agenda' | '/auth' | '/funil' | '/site'
+  fullPaths: '/' | '/agenda' | '/auth' | '/funil' | '/inbox' | '/site'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/agenda' | '/auth' | '/funil' | '/site'
-  id: '__root__' | '/' | '/agenda' | '/auth' | '/funil' | '/site'
+  to: '/' | '/agenda' | '/auth' | '/funil' | '/inbox' | '/site'
+  id: '__root__' | '/' | '/agenda' | '/auth' | '/funil' | '/inbox' | '/site'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +85,7 @@ export interface RootRouteChildren {
   AgendaRoute: typeof AgendaRoute
   AuthRoute: typeof AuthRoute
   FunilRoute: typeof FunilRoute
+  InboxRoute: typeof InboxRoute
   SiteRoute: typeof SiteRoute
 }
 
@@ -109,6 +119,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FunilRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/inbox': {
+      id: '/inbox'
+      path: '/inbox'
+      fullPath: '/inbox'
+      preLoaderRoute: typeof InboxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/site': {
       id: '/site'
       path: '/site'
@@ -124,6 +141,7 @@ const rootRouteChildren: RootRouteChildren = {
   AgendaRoute: AgendaRoute,
   AuthRoute: AuthRoute,
   FunilRoute: FunilRoute,
+  InboxRoute: InboxRoute,
   SiteRoute: SiteRoute,
 }
 export const routeTree = rootRouteImport
