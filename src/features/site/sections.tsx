@@ -656,7 +656,7 @@ type ThumbKind = 'kanban' | 'cards' | 'list' | 'stats' | 'table' | 'toggles' | '
 function MiniThumb({ kind }: { kind: ThumbKind }) {
   const rows = (n: number) => Array.from({ length: n }, (_, i) => i);
   return (
-    <div className={`lp-mini ${kind}`} aria-hidden="true">
+    <div className={`lp-mini k-${kind}`} aria-hidden="true">
       <div className="lp-mini-bar">
         <span className="brand-logo" />
         <i />
@@ -730,13 +730,13 @@ function MiniThumb({ kind }: { kind: ThumbKind }) {
           </>
         )}
         {kind === 'chart' && (
-          <div className="chart">
-            <div className="bars">
+          <div className="m-chart">
+            <div className="m-bars">
               {[90, 55, 30, 20, 10].map((h, i) => (
                 <i key={i} style={{ height: `${h}%` }} className={['b', 'g', 'y', 'o', 'p'][i]} />
               ))}
             </div>
-            <div className="hbars">
+            <div className="m-hbars">
               {[80, 64, 50, 36, 22].map((w, i) => (
                 <i key={i} style={{ width: `${w}%` }} />
               ))}
