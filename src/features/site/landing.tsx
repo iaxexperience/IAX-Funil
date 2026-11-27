@@ -169,6 +169,7 @@ export function LandingPage() {
 
       <main id="topo">
         <section className="lp-hero">
+          <video className="lp-hero-video" src={VIDEO_OFFICE} poster={VIDEO_OFFICE_POSTER} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" />
           <div className="lp-container lp-hero-grid">
             <div className="lp-hero-copy">
               <span className="lp-eyebrow">
@@ -187,7 +188,7 @@ export function LandingPage() {
                   Começar agora
                   <ArrowRight size={18} />
                 </Link>
-                <Link to="/" search={{}} className="lp-btn ghost">
+                <Link to="/" search={{}} className="lp-btn ghost-light">
                   <Play size={16} />
                   Ver demonstração
                 </Link>
@@ -235,6 +236,48 @@ export function LandingPage() {
                 <BarChart3 size={20} />
                 Relatórios
               </span>
+            </div>
+          </div>
+        </section>
+
+        <section className="lp-section lp-leo" id="leo">
+          <div className="lp-container lp-leo-grid">
+            <figure className="lp-leo-art">
+              <img src="/img/leo-assistente.webp" alt="Leo, o assistente virtual, conversando com um cliente na janela de chat" width={1212} height={1297} loading="lazy" decoding="async" />
+              <figcaption className="lp-leo-badge">
+                <span className="lp-leo-face" aria-hidden="true" />
+                <div>
+                  <strong>Leo está online</strong>
+                  <small>Responde em segundos</small>
+                </div>
+              </figcaption>
+            </figure>
+            <div className="lp-leo-copy">
+              <span className="lp-eyebrow">
+                <Bot size={14} />
+                Assistente virtual
+              </span>
+              <h2>
+                Conheça o <span className="lp-grad">Leo</span>, o assistente que atende seus clientes 24 horas
+              </h2>
+              <p>
+                O Leo tira dúvidas, abre chamados, envia manuais e, quando precisa, passa a conversa para um atendente humano. Seu cliente nunca fica sem
+                resposta, nem de madrugada.
+              </p>
+              <ul className="lp-leo-pills">
+                {leoPills.map((p) => (
+                  <li key={p.label}>
+                    <span>
+                      <p.icon size={18} />
+                    </span>
+                    {p.label}
+                  </li>
+                ))}
+              </ul>
+              <a href="#contato" className="lp-btn primary">
+                Quero o Leo na minha empresa
+                <ArrowRight size={18} />
+              </a>
             </div>
           </div>
         </section>
@@ -288,8 +331,11 @@ export function LandingPage() {
                 </li>
               </ul>
             </div>
-            <div className="lp-ai-card" aria-hidden="true">
-              <div className="lp-bubble in">
+            <div className="lp-ai-visual" aria-hidden="true">
+              <div className="lp-phone">
+                <video src={VIDEO_PHONE} poster={VIDEO_PHONE_POSTER} autoPlay muted loop playsInline preload="none" />
+              </div>
+              <div className="lp-bubble in lp-ai-question">
                 <b>Cliente</b>Qual o prazo de implantação? Temos 3 unidades.
               </div>
               <div className="lp-ai-suggest">
