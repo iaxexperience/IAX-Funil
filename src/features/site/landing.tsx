@@ -3,35 +3,27 @@ import { Link } from '@tanstack/react-router';
 import {
   MessageCircle,
   Instagram,
-  Columns3,
   CalendarDays,
-  Users,
   BarChart3,
   Sparkles,
   ShieldCheck,
   Zap,
-  CheckCheck,
   ArrowRight,
-  Play,
-  Bell,
-  RefreshCw,
   ChevronDown,
   Menu,
   X,
   Bot,
   FileText,
   Clock,
-  Check,
   Headphones,
   BookOpen,
   ClipboardList,
 } from 'lucide-react';
 import { Brand } from '@/features/sales/shared';
+import { IaxHero, AboutSection, ProductsSection, ContactSection, IAX_EMAIL, IAX_PHONE } from './products';
 import { SolutionsSection, ChatbotSection, CrmSection, LeadsSection, FeatureCardsSection, FunnelSection, AgendaSection, IntegrationsSection, ContactFabs } from './sections';
 
 // Vídeos gratuitos do Mixkit (Mixkit Stock Video Free License: uso comercial liberado, sem atribuição).
-const VIDEO_OFFICE = 'https://assets.mixkit.co/videos/42664/42664-720.mp4';
-const VIDEO_OFFICE_POSTER = 'https://assets.mixkit.co/videos/42664/42664-thumb-720-0.jpg';
 const VIDEO_PHONE = 'https://assets.mixkit.co/videos/43270/43270-720.mp4';
 const VIDEO_PHONE_POSTER = 'https://assets.mixkit.co/videos/43270/43270-thumb-720-0.jpg';
 
@@ -56,91 +48,6 @@ const stats = [
   { value: '1', label: 'histórico único por cliente para todo o time' },
 ];
 
-function ProductMockup() {
-  const chats = [
-    { name: 'Brisa Produtos', msg: 'Vocês controlam lotes também?', time: '11:48', unread: 2, ig: false },
-    { name: 'Nordeste Saneantes', msg: 'Pode me enviar a proposta?', time: '10:24', unread: 1, ig: true },
-    { name: 'CloroMax Indústria', msg: 'Obrigado pelo retorno!', time: '09:15', unread: 0, ig: false },
-    { name: 'EcoClean Industrial', msg: 'Vamos agendar a demonstração', time: 'Ontem', unread: 0, ig: false },
-  ];
-  return (
-    <div className="lp-mock" aria-hidden="true">
-      <div className="lp-mock-top">
-        <span className="lp-mock-logo" />
-        <span className="lp-mock-pill" />
-        <span className="lp-mock-pill short" />
-        <span className="lp-mock-pill" />
-        <span className="lp-mock-avatar" />
-      </div>
-      <div className="lp-mock-body">
-        <div className="lp-mock-list">
-          <div className="lp-mock-search">Pesquisar por nome ou número…</div>
-          {chats.map((c, i) => (
-            <div className={`lp-mock-item ${i === 0 ? 'active' : ''}`} key={c.name}>
-              <span className={`lp-mock-face f${i}`}>
-                <span className={`lp-mock-badge ${c.ig ? 'ig' : ''}`} />
-              </span>
-              <div>
-                <strong>{c.name}</strong>
-                <small>{c.msg}</small>
-              </div>
-              <div className="lp-mock-meta">
-                <time>{c.time}</time>
-                {c.unread > 0 && <b>{c.unread}</b>}
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="lp-mock-chat">
-          <div className="lp-mock-chat-head">
-            <span className="lp-mock-face f0" />
-            <strong>Brisa Produtos</strong>
-            <span className="lp-mock-tag">DEMONSTRAÇÃO</span>
-          </div>
-          <div className="lp-mock-msgs">
-            <div className="lp-bubble in">
-              <b>Marcos</b>Olá! Queremos organizar a produção e o estoque.
-            </div>
-            <div className="lp-bubble out">
-              <b>Camila · Vendas</b>Perfeito! Posso te mostrar como funciona amanhã às 10h?
-              <CheckCheck size={13} />
-            </div>
-            <div className="lp-bubble in ai">
-              <span className="lp-ai-chip">
-                <Sparkles size={11} />
-                Resumo por IA
-              </span>
-              Lead quer controle de lotes e fórmulas. Decisor: sócio. Alta prioridade.
-            </div>
-          </div>
-          <div className="lp-mock-composer">
-            <span>Digite sua mensagem…</span>
-            <i />
-          </div>
-        </div>
-      </div>
-      <div className="lp-float lp-float-1">
-        <span className="lp-float-icon green">
-          <Bell size={15} />
-        </span>
-        <div>
-          <strong>Nova mensagem recebida</strong>
-          <small>WhatsApp · agora</small>
-        </div>
-      </div>
-      <div className="lp-float lp-float-2">
-        <span className="lp-float-icon blue">
-          <RefreshCw size={15} />
-        </span>
-        <div>
-          <strong>Lead movido para Proposta</strong>
-          <small>Funil atualizado</small>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function LandingPage() {
   const [menu, setMenu] = useState(false);
   const [open, setOpen] = useState<number | null>(0);
@@ -153,18 +60,18 @@ export function LandingPage() {
             <Brand />
           </a>
           <nav className={`lp-links ${menu ? 'open' : ''}`} aria-label="Seções">
-            <a href="#solucoes" onClick={() => setMenu(false)}>Soluções</a>
-            <a href="#chatbot" onClick={() => setMenu(false)}>Chatbot</a>
+            <a href="#quem-somos" onClick={() => setMenu(false)}>Quem somos</a>
+            <a href="#sistemas" onClick={() => setMenu(false)}>Sistemas</a>
+            <a href="#solucoes" onClick={() => setMenu(false)}>Atendimento</a>
             <a href="#crm" onClick={() => setMenu(false)}>CRM</a>
-            <a href="#funil" onClick={() => setMenu(false)}>Funil</a>
-            <a href="#ia" onClick={() => setMenu(false)}>IA</a>
             <a href="#integracoes" onClick={() => setMenu(false)}>Integrações</a>
+            <a href="#contato" onClick={() => setMenu(false)}>Contato</a>
             <Link to="/auth" className="lp-link-login">Entrar</Link>
           </nav>
           <div className="lp-nav-cta">
             <Link to="/auth" className="lp-login">Entrar</Link>
-            <a href="#contato" className="lp-btn primary small lp-hide-sm">Fale com o consultor</a>
-            <Link to="/auth" className="lp-btn green small">Começar</Link>
+            <a href="#contato" className="lp-btn primary small lp-hide-sm">Fale conosco</a>
+            <Link to="/inbox" search={{}} className="lp-btn green small">Ver demonstração</Link>
             <button type="button" className="lp-burger" aria-label={menu ? 'Fechar menu' : 'Abrir menu'} onClick={() => setMenu((v) => !v)}>
               {menu ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -173,49 +80,11 @@ export function LandingPage() {
       </header>
 
       <main id="topo">
-        <section className="lp-hero">
-          <video className="lp-hero-video" src={VIDEO_OFFICE} poster={VIDEO_OFFICE_POSTER} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" />
-          <div className="lp-container lp-hero-grid">
-            <div className="lp-hero-copy">
-              <span className="lp-eyebrow">
-                <Sparkles size={14} />
-                Atendimento e vendas com IA
-              </span>
-              <h1>
-                Centralize o atendimento e <span>venda mais</span> pelo WhatsApp
-              </h1>
-              <p>
-                WhatsApp, Instagram, funil de vendas e agenda em uma única plataforma. Sua equipe responde mais rápido, acompanha cada oportunidade e
-                nunca mais esquece um lead.
-              </p>
-              <div className="lp-hero-ctas">
-                <Link to="/auth" className="lp-btn primary">
-                  Começar agora
-                  <ArrowRight size={18} />
-                </Link>
-                <Link to="/inbox" search={{}} className="lp-btn ghost-light">
-                  <Play size={16} />
-                  Ver demonstração
-                </Link>
-              </div>
-              <ul className="lp-hero-checks">
-                <li>
-                  <Check size={15} />
-                  Sem instalação
-                </li>
-                <li>
-                  <Check size={15} />
-                  Computador e celular
-                </li>
-                <li>
-                  <Check size={15} />
-                  Suporte em português
-                </li>
-              </ul>
-            </div>
-            <ProductMockup />
-          </div>
-        </section>
+        <IaxHero />
+
+        <AboutSection />
+
+        <ProductsSection />
 
         <section className="lp-channels">
           <div className="lp-container">
@@ -386,39 +255,37 @@ export function LandingPage() {
           </div>
         </section>
 
-        <section className="lp-cta" id="contato">
-          <div className="lp-container lp-cta-box">
-            <div>
-              <h2>Pronto para não perder mais nenhum lead?</h2>
-              <p>Comece agora e veja sua equipe vender mais em poucos dias.</p>
-            </div>
-            <Link to="/auth" className="lp-btn white">
-              Começar agora
-              <ArrowRight size={18} />
-            </Link>
-          </div>
-        </section>
+        <ContactSection />
       </main>
 
       <footer className="lp-footer">
         <div className="lp-container lp-footer-grid">
           <div>
             <Brand light />
-            <p>Atendimento, funil de vendas e agenda em uma única plataforma.</p>
+            <p>Automações inteligentes, sistemas e integrações para levar sua empresa para o futuro.</p>
+            <p className="ix-foot-contact">
+              <a href={`mailto:${IAX_EMAIL}`}>{IAX_EMAIL}</a>
+              <br />
+              {IAX_PHONE}
+            </p>
           </div>
           <div>
-            <h4>Produto</h4>
-            <a href="#recursos">Recursos</a>
-            <a href="#ia">Inteligência artificial</a>
-            <a href="#funil">Funil de vendas</a>
+            <h4>Sistemas</h4>
+            <a href="#iax-guardian">IAX Guardian</a>
+            <a href="#findflow">FindFlow</a>
+            <a href="#pulse-doacoes">Pulse Doações</a>
+            <a href="#pulse-pep-clinic">Pulse PEP Clinic</a>
+            <a href="#pulse-eleitoral">Pulse Eleitoral</a>
           </div>
           <div>
-            <h4>Acesso</h4>
+            <h4>Plataforma</h4>
+            <a href="#solucoes">Atendimento e CRM</a>
+            <a href="#integracoes">Integrações</a>
             <Link to="/auth">Entrar</Link>
             <Link to="/inbox" search={{}}>Demonstração</Link>
           </div>
         </div>
-        <div className="lp-container lp-copy">© {new Date().getFullYear()} IAX. Todos os direitos reservados.</div>
+        <div className="lp-container lp-copy">© {new Date().getFullYear()} IAX Inteligência Artificial Experience. Todos os direitos reservados.</div>
       </footer>
 
       <ContactFabs />
