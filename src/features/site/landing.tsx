@@ -248,8 +248,8 @@ const aiCards = [
   { title: 'Assistente virtual Leo', text: 'Tira dúvidas, abre chamados, envia manuais e passa para um atendente humano quando precisa.', img: LEO, top: true },
   { title: 'Automação social', text: 'Fluxos para WhatsApp e Instagram que respondem seus clientes no tempo certo, 24 horas por dia.', img: PHOTO_TEAM },
   { title: 'Integrações API', text: 'Conexões com CRMs, Google Calendar, sistemas de pagamento, HL7, MCP e as plataformas que você já usa.', img: PHOTO_SUIT },
-  { title: 'Segurança com IAX Guardian', text: 'Monitoramento contínuo, simulação de ataques e alertas antes que o risco vire incidente.', img: '/img/produtos/iax-guardian.jpg' },
-  { title: 'Atendimento e CRM', text: 'Conversas, leads, funil de vendas e agenda em uma só plataforma, com histórico de cada cliente.', img: '/img/produtos/findflow.jpg' },
+  { title: 'Segurança com IAX Guardian', text: 'Monitoramento contínuo, simulação de ataques e alertas antes que o risco vire incidente.', img: '/img/produtos/iax-guardian.jpg', shot: true },
+  { title: 'Atendimento e CRM', text: 'Conversas, leads, funil de vendas e agenda em uma só plataforma, com histórico de cada cliente.', img: '/img/produtos/findflow.jpg', shot: true },
 ];
 
 function Scroller({ children, label }: { children: ReactNode; label: string }) {
@@ -288,7 +288,7 @@ function AiSection() {
             <article className="sk-ai-card" key={c.title}>
               <h3>{c.title}</h3>
               <p>{c.text}</p>
-              <div className={`sk-ai-img ${c.top ? 'top' : ''}`}>
+              <div className={`sk-ai-img ${'top' in c && c.top ? 'top' : ''} ${'shot' in c && c.shot ? 'shot' : ''}`}>
                 <img src={c.img} alt="" loading="lazy" />
               </div>
             </article>
@@ -353,29 +353,30 @@ function VideoCard({ p }: { p: Product }) {
   const [playing, setPlaying] = useState(false);
   return (
     <article className="sk-video" id={`video-${p.slug}`}>
-      {playing && p.video ? (
-        <video src={p.video} poster={p.poster || p.image} controls autoPlay playsInline />
-      ) : (
-        <>
-          <img src={p.poster || p.image} alt={`Tela do ${p.name}`} loading="lazy" />
-          <div className="sk-video-shade" />
-          {p.video ? (
-            <button type="button" className="sk-play" onClick={() => setPlaying(true)} aria-label={`Assistir ao vídeo do ${p.name}`}>
-              <Play size={18} fill="currentColor" />
-            </button>
-          ) : (
-            <span className="sk-play soon" title="Vídeo em breve">
-              <Play size={18} fill="currentColor" />
-            </span>
-          )}
-          <div className="sk-video-copy">
-            <strong>{p.name}</strong>
-            <span>{p.tag}</span>
-            <p>“{p.headline}”</p>
-            <small>{p.video ? 'Assista à demonstração' : 'Vídeo de demonstração em breve'}</small>
-          </div>
-        </>
-      )}
+      <div className="sk-video-media">
+        {playing && p.video ? (
+          <video src={p.video} poster={p.poster || p.image} controls autoPlay playsInline />
+        ) : (
+          <>
+            <img src={p.poster || p.image} alt={`Tela do ${p.name}`} loading="lazy" />
+            {p.video ? (
+              <button type="button" className="sk-play" onClick={() => setPlaying(true)} aria-label={`Assistir ao vídeo do ${p.name}`}>
+                <Play size={18} fill="currentColor" />
+              </button>
+            ) : (
+              <span className="sk-play soon" title="Vídeo em breve">
+                <Play size={18} fill="currentColor" />
+              </span>
+            )}
+          </>
+        )}
+      </div>
+      <div className="sk-video-copy">
+        <strong>{p.name}</strong>
+        <span>{p.tag}</span>
+        <p>“{p.headline}”</p>
+        <small>{p.video ? 'Assista à demonstração' : 'Vídeo de demonstração em breve'}</small>
+      </div>
     </article>
   );
 }
