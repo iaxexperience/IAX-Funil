@@ -143,9 +143,9 @@ function Hero() {
 }
 
 /* ------------------------------------------------------- Clientes (carrossel de logos) */
-type Client = { name: string; logo?: { src: string; w: number; h: number }; role?: string; mcp?: { color: string; icon?: string; initials?: string } };
-// Ícones de marca do Simple Icons (CDN com versão fixa). Mercado Livre e Magalu não existem lá: usam iniciais.
-const brandIcon = (slug: string) => `https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/${slug}.svg`;
+type Client = { name: string; logo?: { src: string; w: number; h: number }; role?: string; mcp?: { src: string; w: number; h: number } };
+// Logos oficiais em SVG do Wikimedia Commons (domínio público; marcas registradas de cada empresa).
+const commons = (path: string) => `https://upload.wikimedia.org/wikipedia/commons/${path}`;
 const clients: Client[] = [
   { name: 'FAP · Fundação Assistencial da Paraíba', logo: { src: '/img/clientes/fap.png', w: 164, h: 121 } },
   { name: 'Inovar Imóveis', logo: { src: '/img/clientes/inovar-imoveis.png', w: 600, h: 177 } },
@@ -153,10 +153,10 @@ const clients: Client[] = [
   { name: 'Luciano Cartaxo', role: 'Deputado' },
   { name: 'Tovar Correia Lima', role: 'Deputado' },
   // Integrações MCP de e-commerce em desenvolvimento (nome em texto, sem logotipo oficial das marcas).
-  { name: 'Mercado Livre', mcp: { color: '#FFE600', initials: 'ML' } },
-  { name: 'Magalu', mcp: { color: '#0086FF', initials: 'M' } },
-  { name: 'Shopee', mcp: { color: '#EE4D2D', icon: brandIcon('shopee') } },
-  { name: 'Amazon', mcp: { color: '#232F3E', icon: brandIcon('amazon') } },
+  { name: 'Mercado Livre', mcp: { src: commons('1/16/Mercado_Livre_wordmark_%28Portuguese_version%29.svg'), w: 345, h: 136 } },
+  { name: 'Magalu', mcp: { src: commons('b/be/Magalu_%282019%29.svg'), w: 490, h: 140 } },
+  { name: 'Shopee', mcp: { src: commons('0/0e/Shopee_logo.svg'), w: 264, h: 375 } },
+  { name: 'Amazon', mcp: { src: commons('a/a9/Amazon_logo.svg'), w: 603, h: 182 } },
 ];
 const initialsOf = (name: string) =>
   name
@@ -169,14 +169,9 @@ const initialsOf = (name: string) =>
 function ClientItem({ c }: { c: Client }) {
   if (c.mcp)
     return (
-      <span className="sk-client mcp">
-        <span className={`sk-client-avatar mcp ${c.mcp.color === '#FFE600' ? 'light' : ''}`} style={{ background: c.mcp.color }} aria-hidden="true">
-          {c.mcp.icon ? <img src={c.mcp.icon} alt="" width={22} height={22} loading="lazy" /> : c.mcp.initials}
-        </span>
-        <span>
-          <b>{c.name}</b>
-          <small>via MCP</small>
-        </span>
+      <span className="sk-client mcp" title={`${c.name} via MCP`}>
+        <img className="sk-mcp-logo" src={c.mcp.src} alt={c.name} width={c.mcp.w} height={c.mcp.h} loading="lazy" decoding="async" />
+        <small>via MCP</small>
       </span>
     );
   return c.logo ? (
