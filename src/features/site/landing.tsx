@@ -70,7 +70,6 @@ function Nav() {
   const links = [
     ['#para-quem', 'Para quem'],
     ['#sistemas', 'Sistemas'],
-    ['#solucoes', 'Soluções'],
     ['#ia', 'Inteligência artificial'],
     ['#contato', 'Contato'],
   ];
@@ -259,39 +258,6 @@ function Segments() {
   );
 }
 
-/* ------------------------------------------------- Soluções (cartões com check) */
-function Solutions() {
-  return (
-    <section className="sk-light" id="solucoes">
-      <div className="sk-wrap sk-sol-grid">
-        <div className="sk-sticky">
-          <h2>Soluções IAX para o seu negócio</h2>
-          <p className="sk-lead">Cinco sistemas próprios, construídos a partir de problemas reais e prontos para crescer com a sua operação.</p>
-          <Cta href={waLink('Olá! Quero falar com um consultor da IAX.')} external>
-            Falar com um consultor
-          </Cta>
-        </div>
-        <div className="sk-sol-list">
-          {products.map((p) => (
-            <article className="sk-card" key={p.slug} id={p.slug}>
-              <span className="sk-check">
-                <Check size={16} strokeWidth={3} />
-              </span>
-              <small className="sk-card-tag">{p.tag}</small>
-              <h3>{p.name}</h3>
-              <p className="sk-card-head">{p.headline}</p>
-              <p>{p.text}</p>
-              <a href={`#video-${p.slug}`} className="sk-link">
-                Ver em ação <ArrowRight size={15} />
-              </a>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ---------------------------------------------------------------- Números */
 const facts = [
   { icon: Boxes, value: '5', label: 'sistemas próprios', text: 'Segurança, ERP industrial, doações, saúde e gestão eleitoral desenvolvidos pela IAX.' },
@@ -381,7 +347,7 @@ function AiSection() {
           ))}
         </CardGrid>
         <div className="sk-center sk-mt">
-          <Cta href="#solucoes">Conheça nossas soluções</Cta>
+          <Cta href="#videos">Veja os sistemas em ação</Cta>
         </div>
       </div>
     </section>
@@ -583,7 +549,7 @@ function Footer() {
         <div>
           <h4>Sistemas</h4>
           {products.map((p) => (
-            <a key={p.slug} href={`#${p.slug}`}>
+            <a key={p.slug} href={`#video-${p.slug}`}>
               {p.name}
             </a>
           ))}
@@ -624,7 +590,6 @@ export function LandingPage() {
         <Hero />
         <Efficiency />
         <Segments />
-        <Solutions />
         <Numbers />
         <AiSection />
         <WhyIax />
