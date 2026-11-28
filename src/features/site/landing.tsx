@@ -42,8 +42,8 @@ function Logo({ className = '', dark = false }: { className?: string; dark?: boo
       className={`sk-logo ${className}`}
       src={dark ? '/img/iax-logo-nova-escuro.png' : '/img/iax-logo-nova.png'}
       alt="IAX · Inteligência Artificial Experience"
-      width={dark ? 1112 : 1000}
-      height={dark ? 514 : 402}
+      width={1000}
+      height={402}
     />
   );
 }

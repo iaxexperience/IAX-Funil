@@ -1914,3 +1914,8 @@ html:has(.sk) { scroll-behavior:smooth; scroll-padding-top:96px; }
 .sk .sk-logo { height:66px; margin:-4px 0; }
 .sk .sk-foot-logo { height:72px; margin:0; }
 @media(max-width:760px) { .sk .sk-logo { height:54px; margin:-2px 0; } .au-brand .brand-img { height:54px; } }
+
+/* Logo nova: versão escura sem brilho (mesmo recorte da clara), tamanhos ajustados */
+.sk .sk-logo { height:58px; margin:0; }
+.brand.light .brand-img { height:42px; margin:0; }
+@media(max-width:760px) { .sk .sk-logo { height:48px; margin:0; } .brand.light .brand-img { height:36px; } }

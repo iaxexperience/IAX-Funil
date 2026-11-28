@@ -10,7 +10,7 @@ export function Brand({ light = false }: { light?: boolean }) {
   return (
     <div className={`brand ${light ? 'light' : ''}`}>
       {/* PNG 3D com fundo transparente; a versão "dark" tem contorno luminoso para fundos azuis. */}
-      <img className="brand-img" src={light ? '/img/iax-logo-nova-escuro.png' : '/img/iax-logo-nova.png'} alt="IAX · Inteligência Artificial Experience" width={light ? 1112 : 1000} height={light ? 514 : 402} decoding="async" />
+      <img className="brand-img" src={light ? '/img/iax-logo-nova-escuro.png' : '/img/iax-logo-nova.png'} alt="IAX · Inteligência Artificial Experience" width={1000} height={402} decoding="async" />
     </div>
   );
 }
