@@ -28,3 +28,6 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Keep agenda date, view and filters in route search parameters and calendar filtering in a browser-safe sales helper, so shared links and tests use the same date boundaries.
+- Reuse ActivityForm for creating and editing activities through SalesProvider, so live and demonstration workflows share the same controls.

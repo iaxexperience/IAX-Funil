@@ -6,7 +6,8 @@ import { toast } from 'sonner';
 import type { Lead, LeadPatch, Activity, Message, Note, Profile } from './model';
 import { demoLeads, demoActivities, demoMessages, demoNotes, demoProfiles } from './demo';
 type Snapshot = {leads:Lead[]; activities:Activity[]; messages:Message[]; notes:Note[]; profiles:Profile[]; admin:boolean};
-type SalesData = Snapshot & {user:User|null; demo:boolean; updateLead:(id:string,patch:LeadPatch)=>Promise<void>; addLead:(patch:LeadPatch)=>Promise<string>; addActivity:(activity:Omit<Activity,'id'|'created_at'>)=>Promise<void>; updateActivity:(id:string,status:string)=>Promise<void>; addNote:(id:string,content:string)=>Promise<void>};
+type ActivityPatch = Partial<Omit<Activity,'id'|'created_at'>>;
+type SalesData = Snapshot & {user:User|null; demo:boolean; updateLead:(id:string,patch:LeadPatch)=>Promise<void>; addLead:(patch:LeadPatch)=>Promise<string>; addActivity:(activity:Omit<Activity,'id'|'created_at'>)=>Promise<void>; updateActivity:(id:string,patch:string|ActivityPatch)=>Promise<void>; addNote:(id:string,content:string)=>Promise<void>};
 const AuthContext = createContext<User|null>(null);
 const DataContext = createContext<SalesData|null>(null);
 export const useSales = () => { const ctx=useContext(DataContext); if(!ctx) throw new Error('Contexto comercial indisponível'); return ctx; };
@@ -29,7 +30,7 @@ function LiveData({user,children}:{user:User;children:ReactNode}) {
  updateLead:async(id,patch)=>{const result=await supabase.from('leads').update(patch).eq('id',id);if(result.error)throw result.error;await refresh();},
  addLead:async(patch)=>{const result=await supabase.from('leads').insert({...patch,company:patch.company??'',owner_id:patch.owner_id??user.id}).select('id').single();if(result.error)throw result.error;await refresh();return result.data.id;},
  addActivity:async(activity)=>{const result=await supabase.from('activities').insert(activity);if(result.error)throw result.error;await refresh();},
- updateActivity:async(id,status)=>{const result=await supabase.from('activities').update({status}).eq('id',id);if(result.error)throw result.error;await refresh();},
+ updateActivity:async(id,patch)=>{const result=await supabase.from('activities').update(typeof patch==='string'?{status:patch}:patch).eq('id',id);if(result.error)throw result.error;await refresh();},
  addNote:async(id,content)=>{const result=await supabase.from('notes').insert({lead_id:id,content,author_id:user.id});if(result.error)throw result.error;await refresh();}};
  return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }
@@ -39,7 +40,7 @@ function DemoData({children}:{children:ReactNode}) {
  updateLead:async(id,patch)=>setData(d=>({...d,leads:d.leads.map(l=>l.id===id?{...l,...patch}:l),activities:[...d.activities,{id:crypto.randomUUID(),lead_id:id,type:'Atualização',title:'Perfil do lead atualizado',due_at:new Date().toISOString(),created_at:new Date().toISOString(),owner_id:'demo-1',status:'concluída',observation:''}]})),
  addLead:async(patch)=>{const id=crypto.randomUUID(); const base=demoLeads[0];if(!base)throw new Error('Modelo indisponível');setData(d=>({...d,leads:[...d.leads,{...base,id,company:'',decision_maker:'',phone:'',instagram:'',city:'',state:'',pain:'',next_action:'',next_at:null,stage:0,unread:0,qualification:[false,false,false,false,false],...patch,created_at:new Date().toISOString()}]}));toast('Lead criado na demonstração. Entre para salvar seus dados.');return id;},
  addActivity:async(activity)=>setData(d=>({...d,activities:[...d.activities,{...activity,id:crypto.randomUUID(),created_at:new Date().toISOString()}],leads:d.leads.map(l=>l.id===activity.lead_id?{...l,next_action:activity.title,next_at:activity.due_at}:l)})),
- updateActivity:async(id,status)=>setData(d=>({...d,activities:d.activities.map(a=>a.id===id?{...a,status}:a)})),
+ updateActivity:async(id,patch)=>setData(d=>({...d,activities:d.activities.map(a=>a.id===id?{...a,...(typeof patch==='string'?{status:patch}:patch)}:a)})),
  addNote:async(id,content)=>setData(d=>({...d,notes:[...d.notes,{id:crypto.randomUUID(),lead_id:id,content,author_id:'demo-1',created_at:new Date().toISOString()}]}))};
  return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 }
