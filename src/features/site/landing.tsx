@@ -40,10 +40,10 @@ function Logo({ className = '', dark = false }: { className?: string; dark?: boo
   return (
     <img
       className={`sk-logo ${className}`}
-      src={dark ? '/img/iax-logo-completa-hero.png' : '/img/iax-logo-completa.png'}
+      src={dark ? '/img/iax-logo-nova-escuro.png' : '/img/iax-logo-nova.png'}
       alt="IAX · Inteligência Artificial Experience"
-      width={1285}
-      height={727}
+      width={dark ? 1112 : 1000}
+      height={dark ? 514 : 402}
     />
   );
 }
