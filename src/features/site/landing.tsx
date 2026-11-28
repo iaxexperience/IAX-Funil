@@ -92,7 +92,7 @@ function Nav() {
         <div className="sk-wrap">
           <nav className="sk-nav" aria-label="Menu principal">
             <a href="#topo" className="sk-nav-logo" aria-label="IAX: início">
-              <Logo dark />
+              <Logo />
             </a>
             <div className={`sk-nav-links ${open ? 'open' : ''}`}>
               {links.map(([href, label]) => (

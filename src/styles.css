@@ -1919,3 +1919,15 @@ html:has(.sk) { scroll-behavior:smooth; scroll-padding-top:96px; }
 .sk .sk-logo { height:58px; margin:0; }
 .brand.light .brand-img { height:42px; margin:0; }
 @media(max-width:760px) { .sk .sk-logo { height:48px; margin:0; } .brand.light .brand-img { height:36px; } }
+
+/* Menu principal branco: a logo aparece nas cores originais, igual ao arquivo */
+.sk .sk-nav-bar { background:oklch(1 0 0 / 0.97); border-bottom:1px solid oklch(0.9 0.008 262); backdrop-filter:blur(14px); }
+.sk .sk-header.scrolled .sk-nav-bar { background:oklch(1 0 0); border-bottom-color:oklch(0.9 0.008 262); box-shadow:0 10px 30px oklch(0.2 0.03 262 / 0.14); }
+.sk .sk-nav-links { color:oklch(0.32 0.03 262); }
+.sk .sk-nav-links a:hover { color:var(--sk-accent); }
+.sk .sk-burger { border-color:oklch(0.88 0.01 262); color:oklch(0.27 0.03 262); }
+@media(max-width:1100px) {
+  .sk .sk-nav-links { background:oklch(1 0 0); border-color:oklch(0.9 0.008 262); box-shadow:0 20px 40px oklch(0.15 0.03 262 / 0.18); }
+  .sk .sk-nav-links a { border-bottom-color:oklch(0.93 0.006 262); }
+}
+@media(max-width:1100px) { .sk .sk-nav-links .sk-nav-login { color:var(--sk-accent) !important; } }
