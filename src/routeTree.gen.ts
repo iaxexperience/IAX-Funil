@@ -17,6 +17,9 @@ import { Route as FunilRouteImport } from './routes/funil'
 import { Route as InboxRouteImport } from './routes/inbox'
 import { Route as IntegracoesRouteImport } from './routes/integracoes'
 import { Route as SiteRouteImport } from './routes/site'
+import { Route as ApiV1ChamadosRouteImport } from './routes/api/v1/chamados'
+import { Route as ApiV1ChamadosIdRouteImport } from './routes/api/v1/chamados.$id'
+import { Route as ApiV1ChamadosIdMensagensRouteImport } from './routes/api/v1/chamados.$id.mensagens'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -58,6 +61,22 @@ const SiteRoute = SiteRouteImport.update({
   path: '/site',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1ChamadosRoute = ApiV1ChamadosRouteImport.update({
+  id: '/api/v1/chamados',
+  path: '/api/v1/chamados',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1ChamadosIdRoute = ApiV1ChamadosIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiV1ChamadosRoute,
+} as any)
+const ApiV1ChamadosIdMensagensRoute =
+  ApiV1ChamadosIdMensagensRouteImport.update({
+    id: '/mensagens',
+    path: '/mensagens',
+    getParentRoute: () => ApiV1ChamadosIdRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -68,6 +87,9 @@ export interface FileRoutesByFullPath {
   '/inbox': typeof InboxRoute
   '/integracoes': typeof IntegracoesRoute
   '/site': typeof SiteRoute
+  '/api/v1/chamados': typeof ApiV1ChamadosRouteWithChildren
+  '/api/v1/chamados/$id': typeof ApiV1ChamadosIdRouteWithChildren
+  '/api/v1/chamados/$id/mensagens': typeof ApiV1ChamadosIdMensagensRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -78,6 +100,9 @@ export interface FileRoutesByTo {
   '/inbox': typeof InboxRoute
   '/integracoes': typeof IntegracoesRoute
   '/site': typeof SiteRoute
+  '/api/v1/chamados': typeof ApiV1ChamadosRouteWithChildren
+  '/api/v1/chamados/$id': typeof ApiV1ChamadosIdRouteWithChildren
+  '/api/v1/chamados/$id/mensagens': typeof ApiV1ChamadosIdMensagensRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +114,9 @@ export interface FileRoutesById {
   '/inbox': typeof InboxRoute
   '/integracoes': typeof IntegracoesRoute
   '/site': typeof SiteRoute
+  '/api/v1/chamados': typeof ApiV1ChamadosRouteWithChildren
+  '/api/v1/chamados/$id': typeof ApiV1ChamadosIdRouteWithChildren
+  '/api/v1/chamados/$id/mensagens': typeof ApiV1ChamadosIdMensagensRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +129,9 @@ export interface FileRouteTypes {
     | '/inbox'
     | '/integracoes'
     | '/site'
+    | '/api/v1/chamados'
+    | '/api/v1/chamados/$id'
+    | '/api/v1/chamados/$id/mensagens'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +142,9 @@ export interface FileRouteTypes {
     | '/inbox'
     | '/integracoes'
     | '/site'
+    | '/api/v1/chamados'
+    | '/api/v1/chamados/$id'
+    | '/api/v1/chamados/$id/mensagens'
   id:
     | '__root__'
     | '/'
@@ -121,6 +155,9 @@ export interface FileRouteTypes {
     | '/inbox'
     | '/integracoes'
     | '/site'
+    | '/api/v1/chamados'
+    | '/api/v1/chamados/$id'
+    | '/api/v1/chamados/$id/mensagens'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -132,6 +169,7 @@ export interface RootRouteChildren {
   InboxRoute: typeof InboxRoute
   IntegracoesRoute: typeof IntegracoesRoute
   SiteRoute: typeof SiteRoute
+  ApiV1ChamadosRoute: typeof ApiV1ChamadosRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -192,8 +230,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/chamados': {
+      id: '/api/v1/chamados'
+      path: '/api/v1/chamados'
+      fullPath: '/api/v1/chamados'
+      preLoaderRoute: typeof ApiV1ChamadosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/chamados/$id': {
+      id: '/api/v1/chamados/$id'
+      path: '/$id'
+      fullPath: '/api/v1/chamados/$id'
+      preLoaderRoute: typeof ApiV1ChamadosIdRouteImport
+      parentRoute: typeof ApiV1ChamadosRoute
+    }
+    '/api/v1/chamados/$id/mensagens': {
+      id: '/api/v1/chamados/$id/mensagens'
+      path: '/mensagens'
+      fullPath: '/api/v1/chamados/$id/mensagens'
+      preLoaderRoute: typeof ApiV1ChamadosIdMensagensRouteImport
+      parentRoute: typeof ApiV1ChamadosIdRoute
+    }
   }
 }
+
+interface ApiV1ChamadosIdRouteChildren {
+  ApiV1ChamadosIdMensagensRoute: typeof ApiV1ChamadosIdMensagensRoute
+}
+
+const ApiV1ChamadosIdRouteChildren: ApiV1ChamadosIdRouteChildren = {
+  ApiV1ChamadosIdMensagensRoute: ApiV1ChamadosIdMensagensRoute,
+}
+
+const ApiV1ChamadosIdRouteWithChildren = ApiV1ChamadosIdRoute._addFileChildren(
+  ApiV1ChamadosIdRouteChildren,
+)
+
+interface ApiV1ChamadosRouteChildren {
+  ApiV1ChamadosIdRoute: typeof ApiV1ChamadosIdRouteWithChildren
+}
+
+const ApiV1ChamadosRouteChildren: ApiV1ChamadosRouteChildren = {
+  ApiV1ChamadosIdRoute: ApiV1ChamadosIdRouteWithChildren,
+}
+
+const ApiV1ChamadosRouteWithChildren = ApiV1ChamadosRoute._addFileChildren(
+  ApiV1ChamadosRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -204,6 +287,7 @@ const rootRouteChildren: RootRouteChildren = {
   InboxRoute: InboxRoute,
   IntegracoesRoute: IntegracoesRoute,
   SiteRoute: SiteRoute,
+  ApiV1ChamadosRoute: ApiV1ChamadosRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
