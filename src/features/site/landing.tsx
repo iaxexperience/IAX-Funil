@@ -15,6 +15,7 @@ import {
   Clock,
   Plug,
   SlidersHorizontal,
+  ShoppingBag,
   Factory,
   HeartPulse,
   Store,
@@ -143,13 +144,18 @@ function Hero() {
 }
 
 /* ------------------------------------------------------- Clientes (carrossel de logos) */
-type Client = { name: string; logo?: { src: string; w: number; h: number }; role?: string };
+type Client = { name: string; logo?: { src: string; w: number; h: number }; role?: string; mcp?: boolean };
 const clients: Client[] = [
   { name: 'FAP · Fundação Assistencial da Paraíba', logo: { src: '/img/clientes/fap.png', w: 164, h: 121 } },
   { name: 'Inovar Imóveis', logo: { src: '/img/clientes/inovar-imoveis.png', w: 600, h: 177 } },
   { name: 'Paraíba Química', logo: { src: '/img/clientes/paraiba-quimica.png', w: 600, h: 118 } },
   { name: 'Luciano Cartaxo', role: 'Deputado' },
   { name: 'Tovar Correia Lima', role: 'Deputado' },
+  // Integrações MCP de e-commerce em desenvolvimento (nome em texto, sem logotipo oficial das marcas).
+  { name: 'Mercado Livre', mcp: true },
+  { name: 'Magalu', mcp: true },
+  { name: 'Shopee', mcp: true },
+  { name: 'Amazon', mcp: true },
 ];
 const initialsOf = (name: string) =>
   name
@@ -160,6 +166,18 @@ const initialsOf = (name: string) =>
     .join('');
 
 function ClientItem({ c }: { c: Client }) {
+  if (c.mcp)
+    return (
+      <span className="sk-client mcp">
+        <span className="sk-client-avatar mcp" aria-hidden="true">
+          <ShoppingBag size={20} />
+        </span>
+        <span>
+          <b>{c.name}</b>
+          <small>Integração MCP · em desenvolvimento</small>
+        </span>
+      </span>
+    );
   return c.logo ? (
     <span className="sk-client" title={c.name}>
       <img src={c.logo.src} alt={c.name} width={c.logo.w} height={c.logo.h} loading="lazy" decoding="async" />
@@ -184,7 +202,7 @@ function Clients() {
     <section className="sk-clients" aria-labelledby="sk-clients-title">
       <div className="sk-wrap">
         <p className="sk-clients-title" id="sk-clients-title">
-          Empresas, instituições e mandatos que já usam os sistemas da IAX
+          Clientes que usam os sistemas da IAX e integrações MCP com e-commerce em desenvolvimento
         </p>
       </div>
       <div className="sk-marquee">

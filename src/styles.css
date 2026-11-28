@@ -1958,3 +1958,9 @@ html:has(.sk) { scroll-behavior:smooth; scroll-padding-top:96px; }
   .sk-marquee { overflow-x:auto; mask-image:none; -webkit-mask-image:none; }
   .sk-marquee-track { animation:none; }
 }
+
+/* Integrações MCP de e-commerce no carrossel de clientes */
+.sk-client.mcp { gap:12px; padding:10px 18px 10px 10px; height:auto; border:1px dashed oklch(0.8 0.08 262); border-radius:999px; background:oklch(0.97 0.02 262); }
+.sk-client-avatar.mcp { background:linear-gradient(135deg, oklch(0.7 0.15 230), oklch(0.5 0.2 262)); }
+.sk-client.mcp b { display:block; font-size:15px; font-weight:600; color:var(--sk-ink); white-space:nowrap; }
+.sk-client.mcp small { display:block; font-size:11px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:oklch(0.5 0.15 255); white-space:nowrap; }
