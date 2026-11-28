@@ -142,6 +142,66 @@ function Hero() {
   );
 }
 
+/* ------------------------------------------------------- Clientes (carrossel de logos) */
+type Client = { name: string; logo?: { src: string; w: number; h: number }; role?: string };
+const clients: Client[] = [
+  { name: 'FAP · Fundação Assistencial da Paraíba', logo: { src: '/img/clientes/fap.png', w: 164, h: 121 } },
+  { name: 'Inovar Imóveis', logo: { src: '/img/clientes/inovar-imoveis.png', w: 600, h: 177 } },
+  { name: 'Paraíba Química', logo: { src: '/img/clientes/paraiba-quimica.png', w: 600, h: 118 } },
+  { name: 'Luciano Cartaxo', role: 'Deputado' },
+  { name: 'Tovar Correia Lima', role: 'Deputado' },
+];
+const initialsOf = (name: string) =>
+  name
+    .split(' ')
+    .filter((w) => w.length > 2)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join('');
+
+function ClientItem({ c }: { c: Client }) {
+  return c.logo ? (
+    <span className="sk-client" title={c.name}>
+      <img src={c.logo.src} alt={c.name} width={c.logo.w} height={c.logo.h} loading="lazy" decoding="async" />
+    </span>
+  ) : (
+    <span className="sk-client person">
+      <span className="sk-client-avatar" aria-hidden="true">
+        {initialsOf(c.name)}
+      </span>
+      <span>
+        <b>{c.name}</b>
+        <small>{c.role}</small>
+      </span>
+    </span>
+  );
+}
+
+function Clients() {
+  // A lista se repete para o carrossel nunca ficar vazio; leitores de tela recebem só a primeira cópia.
+  const round = [...clients, ...clients, ...clients];
+  return (
+    <section className="sk-clients" aria-labelledby="sk-clients-title">
+      <div className="sk-wrap">
+        <p className="sk-clients-title" id="sk-clients-title">
+          Empresas, instituições e mandatos que já usam os sistemas da IAX
+        </p>
+      </div>
+      <div className="sk-marquee">
+        <div className="sk-marquee-track">
+          {[0, 1].map((copy) =>
+            round.map((c, i) => (
+              <div className="sk-marquee-item" key={`${copy}-${i}`} aria-hidden={copy > 0 || i >= clients.length ? true : undefined}>
+                <ClientItem c={c} />
+              </div>
+            )),
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ------------------------------------------- Mais eficiência (prints em rotação) */
 function Efficiency() {
   const [i, setI] = useState(0);
@@ -588,6 +648,7 @@ export function LandingPage() {
       <Nav />
       <main>
         <Hero />
+        <Clients />
         <Efficiency />
         <Segments />
         <Numbers />
