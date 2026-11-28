@@ -297,7 +297,7 @@ function AuthRoute() {
               </li>
               <li>
                 <Check size={14} />
-                Assistente Leo com inteligência artificial
+                Assistente Alex com inteligência artificial
               </li>
             </ul>
           </div>

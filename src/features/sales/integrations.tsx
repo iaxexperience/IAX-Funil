@@ -173,7 +173,7 @@ export function IntegrationsPage() {
         <div className="ig-soon">
           {[
             { icon: <Mail size={20} />, name: 'E-mail', text: 'Responda e-mails dos clientes na mesma caixa de entrada.' },
-            { icon: <Globe size={20} />, name: 'Chat do site', text: 'Um botão de conversa no seu site, atendido pelo Leo e pela equipe.' },
+            { icon: <Globe size={20} />, name: 'Chat do site', text: 'Um botão de conversa no seu site, atendido pelo Alex e pela equipe.' },
           ].map((s) => (
             <div className="ig-soon-card" key={s.name}>
               <span>{s.icon}</span>

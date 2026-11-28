@@ -34,7 +34,7 @@ const PHOTO_CONTACT = photo(806835);
 const PHOTO_TEAM = photo(1181370, 800);
 const PHOTO_ANALYTICS = photo(7693706, 800);
 const PHOTO_SUIT = photo(17582358, 800);
-const LEO = '/img/leo-assistente.webp';
+const ALEX = '/img/alex-assistente.jpg';
 
 function Logo({ className = '', dark = false }: { className?: string; dark?: boolean }) {
   return (
@@ -280,7 +280,7 @@ const segments = [
     title: 'Varejo e empresas com caixa',
     who: 'Lojas, redes e serviços que usam ERP e PDV e vendem pelo WhatsApp e Instagram.',
     pains: ['Descontos, cancelamentos e quebras de caixa', 'Acessos fora do horário sem alerta', 'Clientes sem resposta fora do expediente'],
-    systems: ['IAX Guardian', 'Atendimento e CRM', 'Assistente Leo'],
+    systems: ['IAX Guardian', 'Atendimento e CRM', 'Assistente Alex'],
     msg: 'Olá! Tenho uma empresa com caixa e ERP e quero conhecer o IAX Guardian.',
   },
   {
@@ -382,7 +382,7 @@ function Numbers() {
 /* ------------------------------------------- Inteligência artificial (carrossel) */
 const aiCards = [
   { title: 'Agentes de IA avançados', text: 'Agendamento automático e captação inteligente de leads com agentes que trabalham sem parar.', img: PHOTO_ANALYTICS },
-  { title: 'Assistente virtual Leo', text: 'Tira dúvidas, abre chamados, envia manuais e passa para um atendente humano quando precisa.', img: LEO, top: true },
+  { title: 'Assistente virtual Alex', text: 'Tira dúvidas, abre chamados, envia manuais e passa para um atendente humano quando precisa.', img: ALEX, top: true },
   { title: 'Automação social', text: 'Fluxos para WhatsApp e Instagram que respondem seus clientes no tempo certo, 24 horas por dia.', img: PHOTO_TEAM },
   { title: 'Integrações API', text: 'Conexões com CRMs, Google Calendar, sistemas de pagamento, HL7, MCP e as plataformas que você já usa.', img: PHOTO_SUIT },
   { title: 'Segurança com IAX Guardian', text: 'Monitoramento contínuo, simulação de ataques e alertas antes que o risco vire incidente.', img: '/img/produtos/iax-guardian.jpg', shot: true },
@@ -432,7 +432,7 @@ function AiSection() {
 const reasons = [
   ['Eficiência desde o primeiro uso', 'Reduza tarefas manuais e acelere processos já nas primeiras semanas.'],
   ['Mais controle, menos risco', 'Regras, alertas e histórico completo para decidir com segurança.'],
-  ['Atendimento 24 horas', 'O Leo e as automações respondem seus clientes a qualquer hora.'],
+  ['Atendimento 24 horas', 'O Alex e as automações respondem seus clientes a qualquer hora.'],
   ['Integra com o que você já usa', 'WhatsApp, Instagram, CRMs, pagamentos e as APIs da sua operação.'],
   ['Segurança de ponta a ponta', 'Dados protegidos e monitorados pelo IAX Guardian.'],
   ['Soluções sob medida', 'Cada sistema é ajustado aos processos e à realidade do seu negócio.'],

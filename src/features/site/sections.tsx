@@ -45,7 +45,7 @@ import {
 export const VIDEO_OFFICE_POSTER = 'https://assets.mixkit.co/videos/42664/42664-thumb-720-0.jpg';
 
 /* Número de WhatsApp do comercial (somente dígitos, com DDI e DDD). Se ficar vazio, o botão leva para a seção de contato.
-   O suporte é feito pelo Leo, no botão acima. */
+   O suporte é feito pelo Alex, no botão acima. */
 const WHATSAPP_COMERCIAL = '5583996583281';
 
 const tones = ['t0', 't1', 't2', 't3', 't4', 't5'];
@@ -886,9 +886,9 @@ function waHref(num: string, msg: string) {
 export function ContactFabs() {
   return (
     <div className="lp-fabs">
-      <a href="#chatbot" className="lp-fab" aria-label="Falar com o Leo, assistente virtual">
+      <a href="#ia" className="lp-fab" aria-label="Conheça o Alex, assistente virtual da IAX">
         <span className="lp-fab-label">
-          <Sparkles size={12} /> Leo · IA
+          <Sparkles size={12} /> Alex · IA
         </span>
         <span className="lp-leo-fab-face lp-fab-leo" />
       </a>
