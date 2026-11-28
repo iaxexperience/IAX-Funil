@@ -23,11 +23,13 @@ import {
   Columns3,
   Building2,
   StickyNote,
+  Sparkles,
 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useSales, runAction } from './data';
 import { Shell, Avatar, Channel, Icp } from './shared';
 import { LeadForm, ActivityForm } from './forms';
+import { AppointmentAssistant } from './appointment-ai';
 import { stages, dateLabel, timeLabel, overdue, icpScore, type Lead } from './model';
 
 type Status = 'Novo' | 'Contatado' | 'Qualificado' | 'Convertido' | 'Perdido';
@@ -73,6 +75,7 @@ function LeadDetail({ lead }: { lead: Lead }) {
   const [note, setNote] = useState('');
   const [edit, setEdit] = useState(false);
   const [activity, setActivity] = useState(false);
+  const [meeting, setMeeting] = useState(false);
   const owner = profiles.find((p) => p.id === lead.owner_id);
   const leadNotes = notes.filter((n) => n.lead_id === lead.id).sort((a, b) => b.created_at.localeCompare(a.created_at));
   const leadActs = activities.filter((a) => a.lead_id === lead.id).sort((a, b) => b.due_at.localeCompare(a.due_at));
@@ -96,6 +99,9 @@ function LeadDetail({ lead }: { lead: Lead }) {
           </Link>
           <button type="button" className="crm-btn ghost" onClick={() => setEdit(true)}>
             <Pencil size={13} /> Editar
+          </button>
+          <button type="button" className="crm-btn ai" onClick={() => setMeeting(true)}>
+            <Sparkles size={14} /> Registrar compromisso
           </button>
           <button type="button" className="crm-btn navy" onClick={() => setActivity(true)}>
             <Plus size={14} /> Registrar atividade
@@ -340,6 +346,7 @@ function LeadDetail({ lead }: { lead: Lead }) {
       </div>
 
       {edit && <LeadForm open lead={lead} onClose={() => setEdit(false)} />}
+      {meeting && <AppointmentAssistant lead={lead} open onClose={() => setMeeting(false)} />}
       <ActivityForm open={activity} leadId={lead.id} onClose={() => setActivity(false)} />
     </div>
   );
