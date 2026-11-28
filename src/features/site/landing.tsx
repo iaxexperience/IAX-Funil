@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { Link } from '@tanstack/react-router';
 import {
-  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   Check,
@@ -350,22 +349,11 @@ const aiCards = [
   { title: 'Atendimento e CRM', text: 'Conversas, leads, funil de vendas e agenda em uma só plataforma, com histórico de cada cliente.', img: '/img/produtos/findflow.jpg', shot: true },
 ];
 
-function Scroller({ children, label }: { children: ReactNode; label: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const move = (dir: number) => ref.current?.scrollBy({ left: dir * (ref.current.clientWidth * 0.8), behavior: 'smooth' });
+/** Grade de cartões: todos aparecem inteiros (3 por linha no computador, 2 no tablet, 1 no celular). */
+function CardGrid({ children, label }: { children: ReactNode; label: string }) {
   return (
-    <div className="sk-scroller">
-      <div className="sk-arrows">
-        <button type="button" onClick={() => move(-1)} aria-label="Anterior">
-          <ArrowLeft size={18} />
-        </button>
-        <button type="button" className="next" onClick={() => move(1)} aria-label="Próximo">
-          <ArrowRight size={18} />
-        </button>
-      </div>
-      <div className="sk-track" ref={ref} role="region" aria-label={label} tabIndex={0}>
-        {children}
-      </div>
+    <div className="sk-grid" aria-label={label}>
+      {children}
     </div>
   );
 }
@@ -381,7 +369,7 @@ function AiSection() {
           Automatize atendimentos, conecte sistemas e tenha controle total da operação. Conheça as soluções em IA que levam eficiência e segurança para a sua
           empresa.
         </p>
-        <Scroller label="Soluções em inteligência artificial">
+        <CardGrid label="Soluções em inteligência artificial">
           {aiCards.map((c) => (
             <article className="sk-ai-card" key={c.title}>
               <h3>{c.title}</h3>
@@ -391,7 +379,7 @@ function AiSection() {
               </div>
             </article>
           ))}
-        </Scroller>
+        </CardGrid>
         <div className="sk-center sk-mt">
           <Cta href="#solucoes">Conheça nossas soluções</Cta>
         </div>
@@ -488,11 +476,11 @@ function Videos() {
             Veja os sistemas da IAX <em>em ação</em>
           </h2>
         </div>
-        <Scroller label="Vídeos dos sistemas">
+        <CardGrid label="Vídeos dos sistemas">
           {products.map((p) => (
             <VideoCard p={p} key={p.slug} />
           ))}
-        </Scroller>
+        </CardGrid>
       </div>
     </section>
   );
