@@ -1895,3 +1895,8 @@ html:has(.sk) { scroll-behavior:smooth; scroll-padding-top:96px; }
 .ai-card.risks ul { margin:0; padding-left:18px; display:flex; flex-direction:column; gap:4px; font-size:13px; line-height:1.5; }
 .ai-note { margin:0; font-size:11.5px; color:var(--muted-foreground); text-align:center; }
 @media(max-width:640px) { .ai-temp { grid-template-columns:1fr; } }
+
+/* Topo: vídeo centralizado ocupando toda a largura, com véu que mantém o texto legível */
+.sk .sk-hero-video { left:0; right:0; width:100%; object-position:center; }
+.sk .sk-hero:before { background:linear-gradient(90deg, oklch(0.15 0.02 262 / 0.9) 0%, oklch(0.15 0.02 262 / 0.72) 38%, oklch(0.15 0.02 262 / 0.45) 70%, oklch(0.15 0.02 262 / 0.4) 100%), linear-gradient(0deg, var(--sk-darker), transparent 32%); }
+@media(max-width:980px) { .sk .sk-hero:before { background:linear-gradient(90deg, oklch(0.15 0.02 262 / 0.92), oklch(0.15 0.02 262 / 0.7)), linear-gradient(0deg, var(--sk-darker), transparent 30%); } }
