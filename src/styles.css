@@ -1964,3 +1964,9 @@ html:has(.sk) { scroll-behavior:smooth; scroll-padding-top:96px; }
 .sk-client-avatar.mcp { background:linear-gradient(135deg, oklch(0.7 0.15 230), oklch(0.5 0.2 262)); }
 .sk-client.mcp b { display:block; font-size:15px; font-weight:600; color:var(--sk-ink); white-space:nowrap; }
 .sk-client.mcp small { display:block; font-size:11px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:oklch(0.5 0.15 255); white-space:nowrap; }
+
+/* Carrossel de clientes mais lento e marcas via MCP com a cor de cada marca */
+.sk .sk-marquee-track { animation-duration:130s; }
+.sk-client-avatar.mcp img { width:22px; height:22px; filter:brightness(0) invert(1); }
+.sk-client-avatar.mcp.light { color:oklch(0.3 0.08 262); }
+.sk-client.mcp small { font-size:12px; letter-spacing:.06em; }

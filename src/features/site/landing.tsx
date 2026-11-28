@@ -15,7 +15,6 @@ import {
   Clock,
   Plug,
   SlidersHorizontal,
-  ShoppingBag,
   Factory,
   HeartPulse,
   Store,
@@ -144,7 +143,9 @@ function Hero() {
 }
 
 /* ------------------------------------------------------- Clientes (carrossel de logos) */
-type Client = { name: string; logo?: { src: string; w: number; h: number }; role?: string; mcp?: boolean };
+type Client = { name: string; logo?: { src: string; w: number; h: number }; role?: string; mcp?: { color: string; icon?: string; initials?: string } };
+// Ícones de marca do Simple Icons (CDN com versão fixa). Mercado Livre e Magalu não existem lá: usam iniciais.
+const brandIcon = (slug: string) => `https://cdn.jsdelivr.net/npm/simple-icons@13.21.0/icons/${slug}.svg`;
 const clients: Client[] = [
   { name: 'FAP · Fundação Assistencial da Paraíba', logo: { src: '/img/clientes/fap.png', w: 164, h: 121 } },
   { name: 'Inovar Imóveis', logo: { src: '/img/clientes/inovar-imoveis.png', w: 600, h: 177 } },
@@ -152,10 +153,10 @@ const clients: Client[] = [
   { name: 'Luciano Cartaxo', role: 'Deputado' },
   { name: 'Tovar Correia Lima', role: 'Deputado' },
   // Integrações MCP de e-commerce em desenvolvimento (nome em texto, sem logotipo oficial das marcas).
-  { name: 'Mercado Livre', mcp: true },
-  { name: 'Magalu', mcp: true },
-  { name: 'Shopee', mcp: true },
-  { name: 'Amazon', mcp: true },
+  { name: 'Mercado Livre', mcp: { color: '#FFE600', initials: 'ML' } },
+  { name: 'Magalu', mcp: { color: '#0086FF', initials: 'M' } },
+  { name: 'Shopee', mcp: { color: '#EE4D2D', icon: brandIcon('shopee') } },
+  { name: 'Amazon', mcp: { color: '#232F3E', icon: brandIcon('amazon') } },
 ];
 const initialsOf = (name: string) =>
   name
@@ -169,12 +170,12 @@ function ClientItem({ c }: { c: Client }) {
   if (c.mcp)
     return (
       <span className="sk-client mcp">
-        <span className="sk-client-avatar mcp" aria-hidden="true">
-          <ShoppingBag size={20} />
+        <span className={`sk-client-avatar mcp ${c.mcp.color === '#FFE600' ? 'light' : ''}`} style={{ background: c.mcp.color }} aria-hidden="true">
+          {c.mcp.icon ? <img src={c.mcp.icon} alt="" width={22} height={22} loading="lazy" /> : c.mcp.initials}
         </span>
         <span>
           <b>{c.name}</b>
-          <small>Integração MCP · em desenvolvimento</small>
+          <small>via MCP</small>
         </span>
       </span>
     );
@@ -666,13 +667,13 @@ export function LandingPage() {
       <Nav />
       <main>
         <Hero />
-        <Clients />
         <Efficiency />
         <Segments />
         <Numbers />
         <AiSection />
         <WhyIax />
         <Videos />
+        <Clients />
         <Contact />
       </main>
       <Footer />
