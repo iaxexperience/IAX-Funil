@@ -1986,3 +1986,4 @@ html:has(.sk) { scroll-behavior:smooth; scroll-padding-top:96px; }
 .sk .sk-client img:not(.sk-mcp-logo) { height:60px; }
 .sk .sk-client img[src*="fap"] { height:70px; }
 @media(max-width:760px) { .sk .sk-client.mcp { height:84px; padding:10px 20px; } .sk-mcp-logo { height:32px; } .sk-mcp-logo[alt="Shopee"] { height:44px; } .sk .sk-client img:not(.sk-mcp-logo) { height:46px; } }
+@media(prefers-reduced-motion:reduce) { .sk .sk-marquee-track { animation:none; transform:none; } }
